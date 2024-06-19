@@ -1,2 +1,3 @@
 # Phan_mem_quan_ly_khach_san
-Phần mềm quản lý khách sạn đơn giản (dùng cho lễ tân), C++
+Bài tập lớn: Phần mềm quản lý khách sạn đơn giản (dùng cho lễ tân)
+Ngôn ngữ: C++
