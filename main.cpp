@@ -5,7 +5,7 @@
 #include "Quan_ly_bao_cao.cpp"
 
 //ham nguyen mau
-//void Dang_nhap();
+void Dang_nhap();
 void So_luong_khach(Khach_hang *&Khach, int &n);
 string ma_kh(Khach_hang *&Khach, int &n);
 bool Kiem_tra_ttkh(Khach_hang *&Khach, int &n); 
@@ -23,8 +23,8 @@ void Menu(Khach_hang *&Khach, int &n);
 
 int main()
 {
-//	Dang_nhap();
-	int n=1;
+	Dang_nhap();
+	int n = 1;
 	
 	Khach_hang *Khach = new Khach_hang[n];
 	
@@ -42,7 +42,6 @@ void Dang_nhap()
 }
 
 //tang so luong phan tu cho mang dong
-
 void So_luong_khach(Khach_hang *&Khach, int &n) 
 {
     Khach_hang* new_Khach = new Khach_hang[n+1];
@@ -165,7 +164,7 @@ bool trung_dat_phong(Khach_hang *&Khach, int &n)
 
 //01. Nhap du lieu khach hang + dat phong
 //nhap du lieu vao mang, neu mang da co du lieu thi dung ham tang so luong mang dong. 
-//khach 02 se duoc check xem co trung thong tin khach 01 khong, neu co nhap lai
+//khach sau se duoc check xem co trung thong tin cac khach truoc khong, neu co nhap lai
 void Nhap_du_lieu(Khach_hang *&Khach, int &n) {
     cout << "\n\nNHAP THONG TIN KHACH HANG" << "\n----------------------------------------------------\n\n";
 
