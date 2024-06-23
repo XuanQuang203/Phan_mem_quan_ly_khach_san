@@ -2,7 +2,7 @@
 #include <string>
 #include <windows.h>
 #include <iomanip>
-#pragma once
+
 using namespace std;
 
 class Danh_sach_phong 
@@ -32,7 +32,7 @@ class Danh_sach_phong
 		{
 	        Ma_phong So_phong;
 	        Dac_diem_phong Dac_diem;
-	        string Tinh_trang = "Trong";
+	        string Tinh_trang;
 	        
 	        Thong_tin_phong() {}
 	        
@@ -148,7 +148,7 @@ class Dat_phong : public Danh_sach_phong
 	
 	        Ngay_thang_nam(int _Ngay, int _Thang, int _Nam)
 	            : Ngay(_Ngay), Thang(_Thang), Nam(_Nam) {}
-	    };
+	    } NTN;
 	
 	    struct Thong_tin_dat_phong 
 		{
@@ -164,6 +164,37 @@ class Dat_phong : public Danh_sach_phong
 	    } DatP;
 	
 	public:
+		bool kt_yy(int yy) {
+		    return yy >= 2024;
+		}
+		
+		bool yy_nhuan(int yy) {
+		    return (yy % 4 == 0 && yy % 100 != 0) || (yy % 400 == 0);
+		}
+		
+		int kt_mm(int mm, int yy) {
+		    switch (mm) {
+		        case 1: return 31;
+		        case 2: return yy_nhuan(yy) ? 29 : 28;
+		        case 3: return 31;
+		        case 4: return 30;
+		        case 5: return 31;
+		        case 6: return 30;
+		        case 7: return 31;
+		        case 8: return 31;
+		        case 9: return 30;
+		        case 10: return 31;
+		        case 11: return 30;
+		        case 12: return 31;
+		        default: return 0;
+		    }
+		}
+		
+		bool kt_dd(int dd, int mm, int yy) {
+		    int maxDay = kt_mm(mm, yy);
+		    return dd >= 1 && dd <= maxDay;
+		}
+		
 	    bool Kiem_tra_datp(int i) 
 		{
 	        return (i >= 0 && i < 3 && DatP.Phong_da_dat == get_So_phong(i));
@@ -194,9 +225,20 @@ class Dat_phong : public Danh_sach_phong
 	
 	            if (valid) 
 				{
-	                cout << "Ngay dat phong (yyyy mm dd): ";
-	                cin >> DatP.Ngay_dat_phong.Nam >> DatP.Ngay_dat_phong.Thang >> DatP.Ngay_dat_phong.Ngay;
-	                cout << "---------------------\n\n";
+	                do 
+					{
+						cout << "Ngay dat phong (dd mm yyyy): "; 
+			        	cin >> NTN.Ngay >> NTN.Thang >> NTN.Nam;
+			        	
+			            if (!kt_yy(NTN.Nam) || !kt_mm(NTN.Thang, NTN.Nam) || !kt_dd(NTN.Ngay, NTN.Thang, NTN.Nam)) 
+						{
+			                cout << "Khong hop le, vui long nhap lai!\n";
+			                cout << "---------------------\n";
+			            }
+			        } 
+					while (!kt_yy(NTN.Nam) || !kt_mm(NTN.Thang, NTN.Nam) || !kt_dd(NTN.Ngay, NTN.Thang, NTN.Nam));
+			        DatP.Ngay_dat_phong = NTN;
+	                cout << "---------------------\n";
 	                break;
 	            } 
 				else 
@@ -215,6 +257,29 @@ class Dat_phong : public Danh_sach_phong
 		{
 	        DatP.Phong_da_dat = Phong_da_dat;
 	    }
+	    
+	    int get_Ngay_dat_phong()
+	    {
+	    	return this->DatP.Ngay_dat_phong.Ngay;
+		}
+		
+		int get_Thang_dat_phong()
+	    {
+	    	return this->DatP.Ngay_dat_phong.Thang;
+		}
+		
+		int get_Nam_dat_phong()
+	    {
+	    	return this->DatP.Ngay_dat_phong.Nam;
+		}
+		
+		void Xoa_dat_phong()
+		{
+			DatP.Phong_da_dat = 0;
+			DatP.Ngay_dat_phong.Ngay = 0;
+			DatP.Ngay_dat_phong.Thang = 0;
+			DatP.Ngay_dat_phong.Nam = 0;
+		}
 	
 	    void Xuat_dat_phong() 
 		{
@@ -301,6 +366,6 @@ class Dat_phong : public Danh_sach_phong
 	
 	    void Xoa_giao_dich() 
 		{
-	        // Function implementation
+	    	
 	    }
 };
