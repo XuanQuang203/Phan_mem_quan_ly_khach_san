@@ -1,29 +1,27 @@
 #include <iostream>
 #include <string>
+#pragma once
 
 using namespace std;
 
-class Nhan_vien
-{
+class nhanVien{
 	private:
-		struct Ngay_thang_nam
-		{
+		struct ngayThangNam{
 			int Ngay, Thang, Nam;
 			
-			Ngay_thang_nam() {}
+			ngayThangNam() {}
 			
-			Ngay_thang_nam(int _Ngay, int _Thang, int _Nam)
+			ngayThangNam(int _Ngay, int _Thang, int _Nam)
 			: Ngay(_Ngay), Thang (_Thang), Nam (_Nam) {}
-		} NTN;
+		} ntn;
 		
-		struct Thong_tin_nv
-		{
+		struct Thong_tin_nv{
 			string Cccd, So_dien_thoai, Ho_ten;
-			Ngay_thang_nam Ngay_sinh;
+			ngayThangNam ngaySinh;
 			
 			Thong_tin_nv() {}
 			
-			Thong_tin_nv(string _Quay_tiep_khach, string _Cccd, string _So_dien_thoai, string _Ho_ten, Ngay_thang_nam _Ngay_sinh)
-			: Ho_ten(_Ho_ten), Cccd(_Cccd), Ngay_sinh(_Ngay_sinh), So_dien_thoai(_So_dien_thoai) {}
-		} NV;
+			Thong_tin_nv(string _Quay_tiep_khach, string _Cccd, string _So_dien_thoai, string _Ho_ten, ngayThangNam _ngaySinh)
+			: Ho_ten(_Ho_ten), Cccd(_Cccd), ngaySinh(_ngaySinh), So_dien_thoai(_So_dien_thoai) {}
+		} nv;
 };

@@ -5,367 +5,356 @@
 
 using namespace std;
 
-class Danh_sach_phong 
-{
+class danhSachPhong{
     protected:
-        struct Dac_diem_phong 
-		{
-	        string Giuong, Noi_that, Wc, View;
+        struct dacDiemPhong{
+	        string giuong, noiThat, wc, view;
 	        
-	        Dac_diem_phong() {}
+	        dacDiemPhong() {}
 	        
-	        Dac_diem_phong(string _Giuong, string _Noi_that, string _Wc, string _View)
-        	: Giuong(_Giuong), Noi_that(_Noi_that), Wc(_Wc), View(_View) {}
+	        dacDiemPhong(string _giuong, string _noiThat, string _wc, string _view)
+        	: giuong(_giuong), noiThat(_noiThat), wc(_wc), view(_view) {}
     	};
         
-        struct Ma_phong 
-		{
-	        int Phong, Tang;
+        struct maPhong{
+	        int phong, tang;
 	        
-	        Ma_phong() {}
+	        maPhong() {}
 	        
-	        Ma_phong(int _Tang, int _Phong)
-	        : Tang(_Tang), Phong(_Phong) {}
+	        maPhong(int _tang, int _phong)
+	        : tang(_tang), phong(_phong) {}
 		};
         
-        struct Thong_tin_phong 
+        struct thongTinPhong 
 		{
-	        Ma_phong So_phong;
-	        Dac_diem_phong Dac_diem;
-	        string Tinh_trang;
+	        maPhong soPhong;
+	        dacDiemPhong dacDiem;
+	        string tinhTrang;
 	        
-	        Thong_tin_phong() {}
+	        thongTinPhong() {}
 	        
-	        Thong_tin_phong(Ma_phong _So_phong, Dac_diem_phong _Dac_diem, string _Tinh_trang)
-        	: So_phong(_So_phong), Dac_diem(_Dac_diem), Tinh_trang (_Tinh_trang) {}
-		} Ds_p[3];
+	        thongTinPhong(maPhong _soPhong, dacDiemPhong _dacDiem, string _tinhTrang)
+        	: soPhong(_soPhong), dacDiem(_dacDiem), tinhTrang(_tinhTrang) {}
+		} dsp[3];
         
     public:
-        Danh_sach_phong() 
-	    {
-	        Ds_p[0] = Thong_tin_phong(Ma_phong(1, 1), Dac_diem_phong("Don", "Co ban", "1", "Vuon"), "Trong");
-	        Ds_p[1] = Thong_tin_phong(Ma_phong(1, 2), Dac_diem_phong("Doi", "Full", "2", "Bien"), "Trong");
-	        Ds_p[2] = Thong_tin_phong(Ma_phong(2, 1), Dac_diem_phong("Doi", "Full", "3", "Bien"), "Trong");
-	    }
-    	
-    	int get_So_phong(int i) 
-		{
-	        if(i < 0 || i >= 3) 
-	        {
-	        	return -1;
-			}
-	        return Ds_p[i].So_phong.Tang * 100 + Ds_p[i].So_phong.Phong;
-		}
-    	
-        void Nhap_thong_tin_ds()
-		{
-
-        	int i;
-        	cout << "\nNhap ma phong can sua (1, 2, 3): ";
-        	cin >> i;
-        	
-        	if(i <= 0 || i > 3)
-            {
-                cout << "Khong ton tai ma phong, vui long thu lai!\n";
-                return;
-            }
-            
-			cout << "---------------------\n";
-    		cout << "Tang thu: " ;
-            cin >> Ds_p[i-1].So_phong.Tang;
-            
-            cout << "Phong so: " ;
-            cin >> Ds_p[i-1].So_phong.Phong;
-            
-            cout << "So phong: ";
-            Danh_sach_phong::get_So_phong(i-1);
-            
-            cout << "Nhap thong tin giuong: " ;
-            cin.ignore();
-            getline(cin, Ds_p[i-1].Dac_diem.Giuong);
-            
-            cout << "Nhap thong tin noi that: " ;
-            getline(cin, Ds_p[i-1].Dac_diem.Noi_that);
-            
-            cout << "Nhap thong tin WC: " ;
-            getline(cin, Ds_p[i-1].Dac_diem.Wc);
-            
-            cout << "Nhap thong tin View:" ;
-            getline(cin, Ds_p[i-1].Dac_diem.View);
-        }
+        danhSachPhong();
         
-        void Hien_thong_tin_ds()
-		{
-            for(int i=0; i<3; i++)
-			{
-                cout << "\nThong tin phong " << endl;
-                cout << "---------------------\n";
-                
-                cout << "Ma phong: " << setw(5) << i+1 
-				<< setw(9) << i+2 
-				<< setw(9) << i+3 << endl;
-				
-                cout << "So phong: " << setw(6) << Ds_p[i].So_phong.Tang * 100 + Ds_p[i].So_phong.Phong 
-				<< setw(9) << Ds_p[i+1].So_phong.Tang * 100 + Ds_p[i+1].So_phong.Phong 
-				<< setw(9) << Ds_p[i+2].So_phong.Tang * 100 + Ds_p[i+2].So_phong.Phong << endl;
-				
-				cout << "Giuong: " << setw(8) << Ds_p[i].Dac_diem.Giuong 
-				<< setw(9) << Ds_p[i+1].Dac_diem.Giuong 
-				<< setw(9) << Ds_p[i+2].Dac_diem.Giuong << endl;
-				
-                cout << "Noi that: " << setw(9) << Ds_p[i].Dac_diem.Noi_that 
-				<< setw(7) << Ds_p[i+1].Dac_diem.Noi_that 
-				<< setw(9) << Ds_p[i+2].Dac_diem.Noi_that << endl;
-				
-                cout << "So WC: " << setw(8) << Ds_p[i].Dac_diem.Wc 
-				<< setw(9) << Ds_p[i+1].Dac_diem.Wc 
-				<< setw(9) << Ds_p[i+2].Dac_diem.Wc << endl;
-				
-                cout << "View: " << setw(11) << Ds_p[i].Dac_diem.View 
-				<< setw(9) << Ds_p[i+1].Dac_diem.View
-				<< setw(9) << Ds_p[i+2].Dac_diem.View << endl;
-				
-                cout << endl;
-                cout << "Tinh trang: " << setw(6) << Ds_p[i].Tinh_trang 
-				<< setw(9) << Ds_p[i+1].Tinh_trang 
-				<< setw(9) << Ds_p[i+2].Tinh_trang << endl;
-				
+    	int get_soPhong(int i);
+        void nhap_danhSachPhong();
+        void xuat_danhSachPhong();
+        
+        friend class datPhong;
+};
+
+class datPhong : public danhSachPhong{
+	private:
+	    struct ngayThangNam{
+	        int ngay, thang, nam;
+	
+	        ngayThangNam() {}
+	
+	        ngayThangNam(int _ngay, int _thang, int _nam)
+	            : ngay(_ngay), thang(_thang), nam(_nam) {}
+	    } ntn;
+	
+	    struct thongTinDatPhong{
+	        int phongDaDat;
+	        ngayThangNam ngayDatPhong;
+	        
+	        int phongMoi;
+	        string lyDoDoi;
+	
+	        thongTinDatPhong() {}
+	
+	        thongTinDatPhong(int _phongDaDat, ngayThangNam _ngayDatPhong, int _phongMoi, string _lyDoDoi)
+	            : phongDaDat(_phongDaDat), ngayDatPhong(_ngayDatPhong), phongMoi(_phongMoi), lyDoDoi(_lyDoDoi) {}
+	    } dp;
+	
+	public:
+		bool kt_yy(int yy);
+		bool yy_nhuan(int yy);
+		int kt_mm(int mm, int yy);
+		bool kt_dd(int dd, int mm, int yy);
+	    bool kt_datPhong(int i);
+	    bool kt_doiPhong(int i);
+	
+	    void nhap_datPhong();
+	    
+	    int get_phongDaDat();
+	    void set_phongDaDat(int _phongDaDat);
+	    int get_ngayDatPhong();
+		int get_thangDatPhong();
+		int get_namDatPhong();
+		
+		void sua_datPhong();
+		void xoa_datPhong();
+		
+	    void xuat_datPhong();
+	    void nhap_doiPhong();
+	    void xacNhanLai();
+	    void xuat_doiPhong();
+};
+
+//danh sach phong
+danhSachPhong::danhSachPhong(){
+    dsp[0] = thongTinPhong(maPhong(1, 1), dacDiemPhong("Don", "Co ban", "1", "Vuon"), "Trong");
+    dsp[1] = thongTinPhong(maPhong(1, 2), dacDiemPhong("Doi", "Full", "2", "Bien"), "Trong");
+    dsp[2] = thongTinPhong(maPhong(2, 1), dacDiemPhong("Doi", "Full", "3", "Bien"), "Trong");
+}
+
+int danhSachPhong::get_soPhong(int i){
+    if(i < 0 || i >= 3){
+    	return -1;
+	}
+    return dsp[i].soPhong.tang * 100 + dsp[i].soPhong.phong;
+}
+
+void danhSachPhong::nhap_danhSachPhong(){
+
+	int i;
+	cout << "\nNhap ma phong can sua (1, 2, 3): ";
+	cin >> i;
+	
+	if(i <= 0 || i > 3){
+        cout << "Khong ton tai ma phong, vui long thu lai!\n";
+        return;
+    }
+    
+	cout << "---------------------\n";
+	cout << "tang thu: " ;
+    cin >> dsp[i-1].soPhong.tang;
+    
+    cout << "Phong so: " ;
+    cin >> dsp[i-1].soPhong.phong;
+    
+    cout << "So phong: ";
+    danhSachPhong::get_soPhong(i-1);
+    
+    cout << "Nhap thong tin giuong: " ;
+    cin.ignore();
+    getline(cin, dsp[i-1].dacDiem.giuong);
+    
+    cout << "Nhap thong tin noi that: " ;
+    getline(cin, dsp[i-1].dacDiem.noiThat);
+    
+    cout << "Nhap thong tin WC: " ;
+    getline(cin, dsp[i-1].dacDiem.wc);
+    
+    cout << "Nhap thong tin View:" ;
+    getline(cin, dsp[i-1].dacDiem.view);
+}
+
+void danhSachPhong::xuat_danhSachPhong(){
+    for(int i=0; i<3; i++){
+        cout << "\nThong tin phong " << endl;
+        cout << "---------------------\n";
+        
+        cout << "Ma phong: " << setw(5) << i+1 
+		<< setw(9) << i+2 
+		<< setw(9) << i+3 << endl;
+		
+        cout << "So phong: " << setw(6) << dsp[i].soPhong.tang * 100 + dsp[i].soPhong.phong 
+		<< setw(9) << dsp[i+1].soPhong.tang * 100 + dsp[i+1].soPhong.phong 
+		<< setw(9) << dsp[i+2].soPhong.tang * 100 + dsp[i+2].soPhong.phong << endl;
+		
+		cout << "Giuong: " << setw(8) << dsp[i].dacDiem.giuong 
+		<< setw(9) << dsp[i+1].dacDiem.giuong 
+		<< setw(9) << dsp[i+2].dacDiem.giuong << endl;
+		
+        cout << "Noi that: " << setw(9) << dsp[i].dacDiem.noiThat 
+		<< setw(7) << dsp[i+1].dacDiem.noiThat 
+		<< setw(9) << dsp[i+2].dacDiem.noiThat << endl;
+		
+        cout << "So WC: " << setw(8) << dsp[i].dacDiem.wc 
+		<< setw(9) << dsp[i+1].dacDiem.wc 
+		<< setw(9) << dsp[i+2].dacDiem.wc << endl;
+		
+        cout << "View: " << setw(11) << dsp[i].dacDiem.view 
+		<< setw(9) << dsp[i+1].dacDiem.view
+		<< setw(9) << dsp[i+2].dacDiem.view << endl;
+		
+        cout << endl;
+        cout << "Tinh trang: " << setw(6) << dsp[i].tinhTrang 
+		<< setw(9) << dsp[i+1].tinhTrang 
+		<< setw(9) << dsp[i+2].tinhTrang << endl;
+		
+        break;
+    }
+}
+
+//dat phong
+bool datPhong::kt_yy(int yy){
+    return yy >= 2024;
+}
+
+bool datPhong::yy_nhuan(int yy){
+    return (yy % 4 == 0 && yy % 100 != 0) || (yy % 400 == 0);
+}
+
+int datPhong::kt_mm(int mm, int yy){
+    switch(mm){
+        case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+			return 31;
+			
+		case 4: case 6: case 9: case 11: 
+			return 30;
+		
+        case 2: 
+			return yy_nhuan(yy) ? 29 : 28;
+
+        default: 
+			return 0;
+    }
+}
+
+bool datPhong::kt_dd(int dd, int mm, int yy){
+    int maxDay = kt_mm(mm, yy);
+    return dd >= 1 && dd <= maxDay;
+}
+
+bool datPhong::kt_datPhong(int i){
+    return (i >= 0 && i < 3 && dp.phongDaDat == get_soPhong(i));
+}
+
+bool datPhong::kt_doiPhong(int i){
+    return (i >= 0 && i < 3 && dp.phongMoi == get_soPhong(i));
+}
+
+void datPhong::nhap_datPhong(){
+    while (true){
+        cout << "---------------------\n";
+        cout << "Phong khach muon dat: ";
+        cin >> dp.phongDaDat;
+
+        bool valid = false;
+        for (int i = 0; i < 3; ++i){
+            if (kt_datPhong(i)){
+                valid = true;
                 break;
             }
         }
-        
-        friend class Dat_phong;
-};
 
-class Dat_phong : public Danh_sach_phong 
-{
-	private:
-	    struct Ngay_thang_nam 
-		{
-	        int Ngay, Thang, Nam;
-	
-	        Ngay_thang_nam() {}
-	
-	        Ngay_thang_nam(int _Ngay, int _Thang, int _Nam)
-	            : Ngay(_Ngay), Thang(_Thang), Nam(_Nam) {}
-	    } NTN;
-	
-	    struct Thong_tin_dat_phong 
-		{
-	        int Phong_da_dat;
-	        Ngay_thang_nam Ngay_dat_phong;
-	        int Phong_moi;
-	        string Ly_do_doi;
-	
-	        Thong_tin_dat_phong() {}
-	
-	        Thong_tin_dat_phong(int _Phong_da_dat, Ngay_thang_nam _Ngay_dat_phong, int _Phong_moi, string _Ly_do_doi)
-	            : Phong_da_dat(_Phong_da_dat), Ngay_dat_phong(_Ngay_dat_phong), Phong_moi(_Phong_moi), Ly_do_doi(_Ly_do_doi) {}
-	    } DatP;
-	
-	public:
-		bool kt_yy(int yy) {
-		    return yy >= 2024;
-		}
-		
-		bool yy_nhuan(int yy) {
-		    return (yy % 4 == 0 && yy % 100 != 0) || (yy % 400 == 0);
-		}
-		
-		int kt_mm(int mm, int yy) {
-		    switch (mm) {
-		        case 1: return 31;
-		        case 2: return yy_nhuan(yy) ? 29 : 28;
-		        case 3: return 31;
-		        case 4: return 30;
-		        case 5: return 31;
-		        case 6: return 30;
-		        case 7: return 31;
-		        case 8: return 31;
-		        case 9: return 30;
-		        case 10: return 31;
-		        case 11: return 30;
-		        case 12: return 31;
-		        default: return 0;
-		    }
-		}
-		
-		bool kt_dd(int dd, int mm, int yy) {
-		    int maxDay = kt_mm(mm, yy);
-		    return dd >= 1 && dd <= maxDay;
-		}
-		
-	    bool Kiem_tra_datp(int i) 
-		{
-	        return (i >= 0 && i < 3 && DatP.Phong_da_dat == get_So_phong(i));
-	    }
-	
-	    bool Kiem_tra_doip(int i) 
-		{
-	        return (i >= 0 && i < 3 && DatP.Phong_moi == get_So_phong(i));
-	    }
-	
-	    void Nhap_dat_phong() 
-		{
-	        while (true) 
-			{
-	            cout << "---------------------\n";
-	            cout << "Phong khach muon dat: ";
-	            cin >> DatP.Phong_da_dat;
-	
-	            bool valid = false;
-	            for (int i = 0; i < 3; ++i) 
+        if (valid){
+            do{
+				cout << "Ngay dat phong (dd mm yyyy): "; 
+	        	cin >> ntn.ngay >> ntn.thang >> ntn.nam;
+	        	
+	            if (!kt_yy(ntn.nam) || !kt_mm(ntn.thang, ntn.nam) || !kt_dd(ntn.ngay, ntn.thang, ntn.nam)) 
 				{
-	                if (Kiem_tra_datp(i)) 
-					{
-	                    valid = true;
-	                    break;
-	                }
-	            }
-	
-	            if (valid) 
-				{
-	                do 
-					{
-						cout << "Ngay dat phong (dd mm yyyy): "; 
-			        	cin >> NTN.Ngay >> NTN.Thang >> NTN.Nam;
-			        	
-			            if (!kt_yy(NTN.Nam) || !kt_mm(NTN.Thang, NTN.Nam) || !kt_dd(NTN.Ngay, NTN.Thang, NTN.Nam)) 
-						{
-			                cout << "Khong hop le, vui long nhap lai!\n";
-			                cout << "---------------------\n";
-			            }
-			        } 
-					while (!kt_yy(NTN.Nam) || !kt_mm(NTN.Thang, NTN.Nam) || !kt_dd(NTN.Ngay, NTN.Thang, NTN.Nam));
-			        DatP.Ngay_dat_phong = NTN;
+	                cout << "Khong hop le, vui long nhap lai!\n";
 	                cout << "---------------------\n";
-	                break;
-	            } 
-				else 
-				{
-	                cout << "Phong khong dung, vui long nhap lai!\n";
 	            }
-	        }
-	    }
-	
-	    int get_Phong_da_dat() 
-		{
-	        return DatP.Phong_da_dat;
-	    }
-	
-	    void set_Phong_da_dat(int Phong_da_dat) 
-		{
-	        DatP.Phong_da_dat = Phong_da_dat;
-	    }
-	    
-	    int get_Ngay_dat_phong()
-	    {
-	    	return this->DatP.Ngay_dat_phong.Ngay;
-		}
-		
-		int get_Thang_dat_phong()
-	    {
-	    	return this->DatP.Ngay_dat_phong.Thang;
-		}
-		
-		int get_Nam_dat_phong()
-	    {
-	    	return this->DatP.Ngay_dat_phong.Nam;
-		}
-		
-		void Xoa_dat_phong()
-		{
-			DatP.Phong_da_dat = 0;
-			DatP.Ngay_dat_phong.Ngay = 0;
-			DatP.Ngay_dat_phong.Thang = 0;
-			DatP.Ngay_dat_phong.Nam = 0;
-		}
-	
-	    void Xuat_dat_phong() 
-		{
-	        cout << "---------------------\n";
-	        cout << "Phong duoc dat: " << DatP.Phong_da_dat << endl;
-	        cout << "Ngay dat phong (dd mm yyyy): " << DatP.Ngay_dat_phong.Ngay << "/" << DatP.Ngay_dat_phong.Thang << "/" << DatP.Ngay_dat_phong.Nam << endl;
-	        cout << "---------------------\n";
-	    }
-	
-	    void Nhap_doi_phong() 
-		{
-	        while (true) 
-			{
-	            cout << "Khach muon chon phong: ";
-	            cin >> DatP.Phong_moi;
-	
-	            bool valid = false;
-	            for (int i = 0; i < 3; ++i) 
-				{
-	                if (Kiem_tra_doip(i)) 
-					{
-	                    valid = true;
-	                    break;
-	                }
-	            }
-	
-	            if (valid) 
-				{
-	                if (DatP.Phong_moi == DatP.Phong_da_dat) 
-					{
-	                    cout << "Phong moi trung voi phong cu, vui long nhap lai!\n";
-	                } 
-					else 
-					{
-	                    cout << "Ly do doi phong cua khach: ";
-	                    cin.ignore();
-	                    getline(cin, DatP.Ly_do_doi);
-	                    cout << endl;
-	                    break;
-	                }
-	            } 
-				else 
-				{
-	                cout << "Phong khong hop le, vui long chon lai!\n";
-	            }
-	        }
-	    }
-	
-	    void Xac_nhan_lai() 
-		{
-	        cout << "Khach muon chon phong: " << DatP.Phong_moi << endl;
-	        cout << "Ly do doi phong cua khach: " << DatP.Ly_do_doi << endl;
-	    }
-	
-	    void Xuat_doi_phong() 
-		{
-	        cout << "\nTHONG BAO";
-	        cout << "\n---------------------\n";
-	        cout << "Xac nhan doi phong\n";
-	        cout << "01. Xac nhan\n";
-	        cout << "02. Huy bo\n";
-	        cout << "---------------------\n";
-	
-	        int Lua_chon;
-	        cout << "Lua chon: ";
-	        cin >> Lua_chon;
-	
-	        if (Lua_chon == 1) 
-			{
-	            int x = DatP.Phong_da_dat;
-	            DatP.Phong_da_dat = DatP.Phong_moi;
-	            DatP.Phong_moi = x;
-	
-	            cout << "\nDa doi phong thanh cong!\n";
-	            cout << "---------------------\n";
-	            cout << "Phong truoc khi doi: " << DatP.Phong_moi << endl;
-	            cout << "Phong sau khi doi: " << DatP.Phong_da_dat << endl;
 	        } 
-			else if (Lua_chon == 2) 
-			{
-	            cout << "\n\nHuy qua trinh doi phong!\n";
-	        }
-	    }
+			while (!kt_yy(ntn.nam) || !kt_mm(ntn.thang, ntn.nam) || !kt_dd(ntn.ngay, ntn.thang, ntn.nam));
+	        dp.ngayDatPhong = ntn;
+            cout << "---------------------\n";
+            break;
+        } 
+		else{
+            cout << "Phong khong dung, vui long nhap lai!\n";
+        }
+    }
+}
+
+int datPhong::get_phongDaDat(){
+    return dp.phongDaDat;
+}
+
+void datPhong::set_phongDaDat(int _phongDaDat){
+    dp.phongDaDat = _phongDaDat;
+}
+
+int datPhong::get_ngayDatPhong(){
+	return this->dp.ngayDatPhong.ngay;
+}
+
+int datPhong::get_thangDatPhong(){
+	return this->dp.ngayDatPhong.thang;
+}
+
+int datPhong::get_namDatPhong(){
+	return this->dp.ngayDatPhong.nam;
+}
+
+void datPhong::sua_datPhong(){
 	
-	    void Xoa_giao_dich() 
-		{
-	    	
-	    }
-};
+}
+
+void datPhong::xoa_datPhong(){
+	dp.phongDaDat = 0;
+	dp.ngayDatPhong.ngay = 0;
+	dp.ngayDatPhong.thang = 0;
+	dp.ngayDatPhong.nam = 0;
+}
+
+void datPhong::xuat_datPhong(){
+    cout << "---------------------\n";
+    cout << "Phong duoc dat: " << dp.phongDaDat << endl;
+    cout << "Ngay dat phong (dd mm yyyy): " << dp.ngayDatPhong.ngay << "/" << dp.ngayDatPhong.thang << "/" << dp.ngayDatPhong.nam << endl;
+    cout << "---------------------\n";
+}
+
+//doi phong
+void datPhong::nhap_doiPhong(){
+    while (true){
+        cout << "khach muon chon phong: ";
+        cin >> dp.phongMoi;
+
+        bool valid = false;
+        for (int i = 0; i < 3; ++i){
+            if (kt_doiPhong(i)){
+                valid = true;
+                break;
+            }
+        }
+
+        if (valid){
+            if (dp.phongMoi == dp.phongDaDat){
+                cout << "Phong moi trung voi phong cu, vui long nhap lai!\n";
+            } 
+			else{
+                cout << "Ly do doi phong cua khach: ";
+                cin.ignore();
+                getline(cin, dp.lyDoDoi);
+                cout << endl;
+                break;
+            }
+        } 
+		else{
+            cout << "Phong khong hop le, vui long chon lai!\n";
+        }
+    }
+}
+
+void datPhong::xacNhanLai(){
+    cout << "khach muon chon phong: " << dp.phongMoi << endl;
+    cout << "Ly do doi phong cua khach: " << dp.lyDoDoi << endl;
+}
+
+void datPhong::xuat_doiPhong(){
+    cout << "\nTHONG BAO";
+    cout << "\n---------------------\n";
+    cout << "Xac nhan doi phong\n";
+    cout << "01. Xac nhan\n";
+    cout << "02. Huy bo\n";
+    cout << "---------------------\n";
+
+    int luaChon;
+    cout << "Lua chon: ";
+    cin >> luaChon;
+
+    if(luaChon == 1){
+        int x = dp.phongDaDat;
+        dp.phongDaDat = dp.phongMoi;
+        dp.phongMoi = x;
+
+        cout << "\nDa doi phong thanh cong!\n";
+        cout << "---------------------\n";
+        cout << "Phong truoc khi doi: " << dp.phongMoi << endl;
+        cout << "Phong sau khi doi: " << dp.phongDaDat << endl;
+    } 
+	else if (luaChon == 2){
+        cout << "\n\nHuy qua trinh doi phong!\n";
+    }
+}
