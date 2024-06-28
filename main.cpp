@@ -1,12 +1,10 @@
 //Project: Phan mem quan ly khach san don gian (dung cho le tan) (console app)
 #include <conio.h>
 #include <sstream>
-#include <iostream>
-#include <string>
 
-//#include "Quan_ly_khach_hang.cpp"
-#include "Quan_ly_bao_cao.cpp"
-#include "Thoi_gian.cpp"
+#include "Quan_ly_khach_hang.cpp"
+//#include "Quan_ly_bao_cao.cpp"
+//#include "Thoi_gian.cpp"
 
 //void makhachHang(khachHang *&khach, int &n);
 void themKhachHang(khachHang *&khach, int &n);
@@ -27,7 +25,6 @@ int main(){
 	int n = 1;
 	
 	khachHang *khach = new khachHang[n];
-//	baoCao *bc = new baoCao[n];
 	
 	menu(khach, n);
 	getch();
@@ -175,10 +172,10 @@ void xuat_duLieu(khachHang *&khach, int &n){
     		cout << "khach hang: " << i + 1 << "\n---------------------\n";
 		    khach[i].xuat_khachHang();
 		    
-		    if(khach[i].get_ngayRa() == 0){
-				cout << "\nkhach chua tra phong\n";
-				cout << "------------------------------\n\n\n";
-			}
+//		    if(khach[i].get_ngayRa() == 0){
+//				cout << "\nkhach chua tra phong\n";
+//				cout << "------------------------------\n\n\n";
+//			}
 			dem++;
 		}
     }
@@ -261,7 +258,7 @@ void khachThanhToan(khachHang *&khach, int &n){
 			
 			cout << "\nXAC NHAN LAI\n";
 			khach[i].xuat_datPhong();
-			cout << "Gio check-in: " << khach[i].get_gioVao() << endl;
+//			cout << "Gio check-in: " << khach[i].get_gioVao() << endl;
 			khach[i].xuat_co();
 			
 			khach[i].khachTraPhong();
