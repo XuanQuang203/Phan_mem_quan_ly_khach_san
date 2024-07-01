@@ -2,7 +2,7 @@
 #include <conio.h>
 #include <sstream>
 
-#include "Quan_ly_khach_hang.cpp"
+#include "khachHang.cpp"
 //#include "Quan_ly_bao_cao.cpp"
 //#include "Thoi_gian.cpp"
 
@@ -406,25 +406,26 @@ void menu(khachHang *&khach, int &n){
 	
 	do{
 		system("cls");
-		cout << "\t  Chuong trinh quan ly khach san" << endl;
-		cout << " =======================<menu>=======================\n";
-		cout << " ==                                                ==\n";
-		cout << " ==       01. Nhap thong tin ve khach hang         ==\n";
-		cout << " ==       02. Danh sach thong tin khach hang       ==\n";
-		cout << " ==       03. Sua thong tin khach hang             ==\n";
-		cout << " ==       04. khach hang muon doi phong            ==\n";
-		cout << " ==       05. khach dung them dich vu              ==\n";
-		cout << " ==       06. khach hang thanh toan                ==\n";
-		cout << " ==       07. Tim kiem khach hang                  ==\n";
-		cout << " ==       08. Xoa thong tin khach hang             ==\n";
-		cout << " ==       ----------------------------------       ==\n";
-		cout << " ==       09. Danh sach, thong tin phong           ==\n";
-		cout << " ==       10. Xuat bao cao                         ==\n";
-		cout << " ==       ----------------------------------       ==\n";
-		cout << " ==       00. Thoat chuong trinh quan ly           ==\n";
-		cout << " ==                                                ==\n";
-		cout << " ====================================================\n";
-		cout << "\t  Nhap lua chon cua ban: ";
+		cout << "=======================<MENU>=====================\n";
+		cout << "==\t  Chuong trinh quan ly khach san  \t==\n";
+		cout << "==\t  ------------------------------  \t==\n";
+		cout << "==\t                                  \t==\n";
+		cout << "==\t01. Nhap thong tin ve khach hang  \t==\n";
+		cout << "==\t02. Danh sach thong tin khach hang\t==\n";
+		cout << "==\t03. Sua thong tin khach hang      \t==\n";
+		cout << "==\t04. khach hang muon doi phong     \t==\n";
+		cout << "==\t05. khach dung them dich vu       \t==\n";
+		cout << "==\t06. khach hang thanh toan         \t==\n";
+		cout << "==\t07. Tim kiem khach hang           \t==\n";
+		cout << "==\t08. Xoa thong tin khach hang      \t==\n";
+		cout << "==\t----------------------------------\t==\n";
+		cout << "==\t09. Danh sach, thong tin phong    \t==\n";
+		cout << "==\t10. Xuat bao cao                  \t==\n";
+		cout << "==\t----------------------------------\t==\n";
+		cout << "==\t00. Thoat chuong trinh quan ly    \t==\n";
+		cout << "==\t                                  \t==\n";
+		cout << "==================================================\n";
+		cout << "\t    Nhap lua chon cua ban: ";
 		cin >> luaChon;
 		cin.ignore(); 
 		
