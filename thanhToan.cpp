@@ -1,18 +1,15 @@
 #include "thanhToan.h"
-#include <iostream>
-
-using namespace std;
 
 thanhToan::thanhToan() : soNgayThue(0), soGioThue(0), thanhTien(0) {}
 
 void thanhToan::khachThanhToan() {
     int x, y;
 
-    x = checkOut::get_ngayRa() - datPhong::get_ngayDatPhong();
+    x = checkOut::get_ngayRa() - checkIn::get_ngayVao();
     if (x == 0) {
         y = checkOut::get_gioRa() - checkIn::get_gioVao();
     } else if (x > 0) {
-        y = (checkOut::get_ngayRa() - datPhong::get_ngayDatPhong()) * 24 + checkOut::get_gioRa() - checkIn::get_gioVao();
+        y = (x * 24) + (checkOut::get_gioRa() - checkIn::get_gioVao());
     } else {
         cout << "Loi tinh toan, vui long kiem tra lai thong tin da nhap!\n";
         return;
@@ -43,18 +40,21 @@ void thanhToan::khachThanhToan() {
     cout << "02. Chuyen khoan\n";
     cout << "---------------------\n";
 
-chonLai:
-    cout << "Khach chon: ";
-    cin >> luaChon;
+    while (true) {
+        cout << "Khach chon: ";
+        cin >> luaChon;
 
-    if (luaChon == 1) {
-        cout << "\nXAC NHAN PHUONG THUC: Tien mat\n";
-    } else if (luaChon == 2) {
-        cout << "\nXAC NHAN PHUONG THUC: Chuyen khoan\n";
-    } else {
-        cout << "Loi nhap, vui long thu lai!";
-        goto chonLai;
+        if (luaChon == 1) {
+            cout << "\nXAC NHAN PHUONG THUC: Tien mat\n";
+            break;
+        } else if (luaChon == 2) {
+            cout << "\nXAC NHAN PHUONG THUC: Chuyen khoan\n";
+            break;
+        } else {
+            cout << "Loi nhap, vui long thu lai!\n";
+        }
     }
+
     cout << "---------------------\n\n";
     cout << "Cam on quy khach da su dung dich vu! \n----------------------------------------------------\n";
 }

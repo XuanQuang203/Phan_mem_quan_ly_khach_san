@@ -1,9 +1,7 @@
 #include "datPhong.h"
-#include "checkIn.h"
-#include "checkOut.h"
 #include "thanhToan.h"
 
-class khachHang : public virtual datPhong, public virtual checkIn, public virtual checkOut, public virtual thanhToan{
+class khachHang : public virtual datPhong, public virtual checkIn, public virtual checkOut, public virtual dichVu, public virtual thanhToan{
 private:
     struct ngayThangNam {
         int ngay, thang, nam;
@@ -12,7 +10,7 @@ private:
 
         ngayThangNam(int _ngay, int _thang, int _nam)
             : ngay(_ngay), thang(_thang), nam(_nam) {}
-    } ntn;
+    } dmy;
 
     struct thongTinkhach {
         string cccd, soDienThoai, hoTen;
@@ -28,6 +26,14 @@ public:
 		khachHang() {}
 		
 		~khachHang() {}
+		
+		string dinhDangThoiGian(int value) {
+			if (value < 10) {
+		        return "0" + to_string(value);
+		    } else {
+		        return to_string(value);
+		    }
+		}
 		
 		bool kt_yy(int yy) {
 		    return yy >= 1900 && yy <= 2024;
@@ -68,18 +74,17 @@ public:
 		
 		    do {
 		        cout << "Nhap ngay sinh (dd mm yyyy): ";
-		        cin >> ntn.ngay >> ntn.thang >> ntn.nam;
+		        cin >> dmy.ngay >> dmy.thang >> dmy.nam;
 		
-		        if (!kt_yy(ntn.nam) || !kt_mm(ntn.thang, ntn.nam) || !kt_dd(ntn.ngay, ntn.thang, ntn.nam)) {
+		        if (!kt_yy(dmy.nam) || !kt_mm(dmy.thang, dmy.nam) || !kt_dd(dmy.ngay, dmy.thang, dmy.nam)) {
 		            cout << "\n---------------------\n";
 		            cout << "khong hop le, vui long nhap lai!\n";
 		            cout << "---------------------\n\n";
 		        }
-		    } while (!kt_yy(ntn.nam) || !kt_mm(ntn.thang, ntn.nam) || !kt_dd(ntn.ngay, ntn.thang, ntn.nam));
-		    kh.ngaySinh = ntn;
+		    } while (!kt_yy(dmy.nam) || !kt_mm(dmy.thang, dmy.nam) || !kt_dd(dmy.ngay, dmy.thang, dmy.nam));
+		    kh.ngaySinh = dmy;
 		
 		    datPhong::nhap_datPhong();
-		//    checkIn::nhap_checkIn();
 		}
 		
 		void chuanHoaChu() {
@@ -149,19 +154,16 @@ public:
 		
 		void xuat_khachHang() {
 		    chuanHoaChu();
+		    string dinhDangNgay = dinhDangThoiGian(kh.ngaySinh.ngay);
+		    string dinhDangThang = dinhDangThoiGian(kh.ngaySinh.thang);
+		    string dinhDangNam = to_string(kh.ngaySinh.nam);
+		    
 		    cout << "Ho ten khach hang: " << kh.hoTen << endl;
 		    cout << "Cccd: " << kh.cccd << endl;
-		    cout << "Ngay sinh (dd mm yyyy): " << kh.ngaySinh.ngay << "/" << kh.ngaySinh.thang << "/" << kh.ngaySinh.nam << endl;
+		    cout << "Ngay sinh (dd mm yyyy): " << dinhDangNgay << "/" << dinhDangThang << "/" << dinhDangNam << endl;
 		    cout << "So dien thoai: " << kh.soDienThoai << endl;
 		
 		    datPhong::xuat_datPhong();
-		//    checkIn::xuat_checkIn();
-		//
-		//    if (checkOut::get_ngayRa() != 0) {
-		//        checkOut::xuat_checkOut();
-		//        cout << "\n---------------------\n";
-		//        cout << "\nkhach da thanh toan\n";
-		//    }
 		}
 		
 		void sua_khachHang(int &n) {
@@ -197,13 +199,13 @@ public:
 		                do {
 		                    cout << "Nhap ngay sinh (dd mm yyyy): ";
 		                    fflush(stdin);
-		                    cin >> ntn.ngay >> ntn.thang >> ntn.nam;
+		                    cin >> dmy.ngay >> dmy.thang >> dmy.nam;
 		
-		                    if (!kt_yy(ntn.nam) || !kt_mm(ntn.thang, ntn.nam) || !kt_dd(ntn.ngay, ntn.thang, ntn.nam)) {
+		                    if (!kt_yy(dmy.nam) || !kt_mm(dmy.thang, dmy.nam) || !kt_dd(dmy.ngay, dmy.thang, dmy.nam)) {
 		                        cout << "khong hop le, vui long nhap lai!\n";
 		                        cout << "---------------------\n";
 		                    }
-		                } while (!kt_yy(ntn.nam) || !kt_mm(ntn.thang, ntn.nam) || !kt_dd(ntn.ngay, ntn.thang, ntn.nam));
+		                } while (!kt_yy(dmy.nam) || !kt_mm(dmy.thang, dmy.nam) || !kt_dd(dmy.ngay, dmy.thang, dmy.nam));
 		                break;
 		                
 		            case 4:
@@ -225,13 +227,13 @@ public:
 		                do {
 		                    cout << "Nhap ngay sinh (dd mm yyyy): ";
 		                    fflush(stdin);
-		                    cin >> ntn.ngay >> ntn.thang >> ntn.nam;
+		                    cin >> dmy.ngay >> dmy.thang >> dmy.nam;
 		
-		                    if (!kt_yy(ntn.nam) || !kt_mm(ntn.thang, ntn.nam) || !kt_dd(ntn.ngay, ntn.thang, ntn.nam)) {
+		                    if (!kt_yy(dmy.nam) || !kt_mm(dmy.thang, dmy.nam) || !kt_dd(dmy.ngay, dmy.thang, dmy.nam)) {
 		                        cout << "khong hop le, vui long nhap lai!\n";
 		                        cout << "---------------------\n";
 		                    }
-		                } while (!kt_yy(ntn.nam) || !kt_mm(ntn.thang, ntn.nam) || !kt_dd(ntn.ngay, ntn.thang, ntn.nam));
+		                } while (!kt_yy(dmy.nam) || !kt_mm(dmy.thang, dmy.nam) || !kt_dd(dmy.ngay, dmy.thang, dmy.nam));
 		
 		                cout << "Nhap SDT khach hang: ";
 		                fflush(stdin);
@@ -263,14 +265,14 @@ public:
 		        kh.hoTen = "0";
 		        kh.cccd = "0";
 		        kh.soDienThoai = "0";
-		        ntn.ngay = 0;
-		        ntn.thang = 0;
-		        ntn.nam = 0;
-		        kh.ngaySinh = ntn;
+		        dmy.ngay = 0;
+		        dmy.thang = 0;
+		        dmy.nam = 0;
+		        kh.ngaySinh = dmy;
 		
 		        datPhong::xoa_datPhong();
-		//        checkIn::xoa_checkIn();
-		//        checkOut::xoa_checkOut();
+		        checkIn::xoa_checkIn();
+		        checkOut::xoa_checkOut();
 		
 		        cout << "\nDA XOA THONG TIN KHACH HANG!\n";
 		        cout << "----------------------------------------------------\n";
@@ -295,20 +297,55 @@ public:
 		    datPhong::xuat_doiPhong();
 		}
 		
+		void nhap_ci() {
+			checkIn::nhap_checkIn();
+		}
+		
+		void sua_ci() {
+			checkIn::sua_checkIn();
+		}
+		
+		void xuat_ci() {
+			checkIn::xuat_checkIn();
+		}
+		
 		void nhap_co() {
-		//    checkOut::nhap_checkOut();
+		    checkOut::nhap_checkOut();
+		}
+		
+		void sua_co() {
+			checkOut::sua_checkOut();
 		}
 		
 		void xuat_co() {
-		//    checkOut::xuat_checkOut();
+		    checkOut::xuat_checkOut();
+		}
+		
+		void kt_tinhTrangPhong() {
+			if (checkIn::get_ngayVao() == 0 && checkOut::get_ngayRa() == 0) {
+		    	cout << "khach da dat phong\n";
+				cout << "------------------------------\n\n";
+			}
+			
+		    if (checkIn::get_ngayVao() != 0 && checkOut::get_ngayRa() == 0) {
+		        checkIn::xuat_checkIn();
+		        cout << "khach chua tra phong\n";
+				cout << "------------------------------\n\n";
+		    }
+		
+		    if (checkOut::get_ngayRa() != 0) {
+		        checkOut::xuat_checkOut();
+		        cout << "khach da thanh toan\n";
+				cout << "------------------------------\n\n";
+		    }
 		}
 		
 		void themDichVu() {
-		    // dichVu::them_dichVu();
+		    dichVu::them_dichVu();
 		}
 		
 		void khachTraPhong() {
-		    // thanhToan::khachThanhToan();
+		    thanhToan::khachThanhToan();
 		}
 
 };

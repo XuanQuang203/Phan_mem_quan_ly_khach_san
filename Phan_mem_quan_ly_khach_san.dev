@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=1
 CompilerSettings=0000000000000000000000000
-UnitCount=14
+UnitCount=12
 
 [VersionInfo]
 Major=1
@@ -61,16 +61,6 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit2]
-FileName=Quan_ly_khach_hang.cpp
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit5]
 FileName=checkIn.h
 CompileCpp=1
 Folder=
@@ -80,17 +70,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit6]
-FileName=checkIn.cpp
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit8]
+[Unit5]
 FileName=checkOut.cpp
 CompileCpp=1
 Folder=
@@ -100,7 +80,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit9]
+[Unit6]
 FileName=dichVu.h
 CompileCpp=1
 Folder=
@@ -110,27 +90,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit7]
-FileName=checkOut.h
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit10]
-FileName=dichVu.cpp
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit11]
+[Unit8]
 FileName=thanhToan.h
 CompileCpp=1
 Folder=
@@ -140,7 +100,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit12]
+[Unit9]
 FileName=thanhToan.cpp
 CompileCpp=1
 Folder=
@@ -150,8 +110,38 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit13]
+[Unit7]
+FileName=dichVu.cpp
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit10]
 FileName=danhSachPhong.h
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit11]
+FileName=datPhong.h
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit12]
+FileName=khachHang.cpp
 CompileCpp=1
 Folder=
 Compile=1
@@ -181,7 +171,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit4]
-FileName=Thoi_gian.cpp
+FileName=checkOut.h
 CompileCpp=1
 Folder=
 Compile=1
@@ -191,7 +181,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit3]
-FileName=Quan_ly_bao_cao.cpp
+FileName=checkIn.cpp
 CompileCpp=1
 Folder=
 Compile=1

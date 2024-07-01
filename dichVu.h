@@ -11,5 +11,5 @@ public:
     friend class thanhToan;
 };
 
-#endif // DICHVU_H
+#endif //DICHVU_H
 
