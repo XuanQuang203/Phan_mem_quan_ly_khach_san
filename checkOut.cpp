@@ -8,61 +8,17 @@ string checkOut::dinhDangThoiGian(int value) {
     }
 }
 
-bool checkOut::kt_gio(int _gio) {
-        return _gio >= 0 && _gio <= 23;
-    }
-
-bool checkOut::kt_phut(int _phut) {
-    return _phut >= 0 && _phut <= 59;
-}
-
-bool checkOut::kt_yy(int yy) {
-    return yy >= 2024;
-}
-
-bool checkOut::yy_nhuan(int yy) {
-    return (yy % 4 == 0 && yy % 100 != 0) || (yy % 400 == 0);
-}
-
-int checkOut::kt_mm(int mm, int yy) {
-    switch(mm) {
-        case 1: case 3: case 5: case 7: case 8: case 10: case 12:
-            return 31;
-        case 4: case 6: case 9: case 11:
-            return 30;
-        case 2:
-            return yy_nhuan(yy) ? 29 : 28;
-        default:
-            return 0;
-    }
-}
-
-bool checkOut::kt_dd(int dd, int mm, int yy) {
-    int maxDay = kt_mm(mm, yy);
-    return dd >= 1 && dd <= maxDay;
-}
-
 void checkOut::nhap_checkOut() {
-    do {
-        cout << "Ngay check-in (dd mm yyyy): ";
-        cin >> dmy.ngay >> dmy.thang >> dmy.nam;
-
-        if (!kt_yy(dmy.nam) || !kt_mm(dmy.thang, dmy.nam) || !kt_dd(dmy.ngay, dmy.thang, dmy.nam)) {
-            cout << "Khong hop le, vui long nhap lai!\n";
-            cout << "---------------------\n";
-        }
-    } while (!kt_yy(dmy.nam) || !kt_mm(dmy.thang, dmy.nam) || !kt_dd(dmy.ngay, dmy.thang, dmy.nam));
+    time_t now = time(0);
+    tm *ltm = localtime(&now);
+    
+    dmy.ngay = ltm->tm_mday;
+    dmy.thang = 1 + ltm->tm_mon;
+    dmy.nam = 1900 + ltm->tm_year;
     co.ngayRa = dmy;
     
-    do {
-        cout << "Gio check-in (h:min): ";
-        cin >> hms.gio >> hms.phut;
-
-        if (!kt_gio(hms.gio) || !kt_phut(hms.phut)) {
-            cout << "Khong hop le, vui long nhap lai!\n";
-            cout << "---------------------\n";
-        }
-    } while (!kt_gio(hms.gio) || !kt_phut(hms.phut));
+    hms.gio = ltm->tm_hour;
+    hms.phut = ltm->tm_min;
     co.gioRa = hms;
 }
 
@@ -166,7 +122,7 @@ void checkOut::xuat_checkOut() {
 	string dinhDangThang = dinhDangThoiGian(co.ngayRa.thang);
 	string dinhDangNam = to_string(co.ngayRa.nam);
 	
-    cout << "Gio check-out: " << dinhDangGio << ":" << dinhDangPhut << endl;
     cout << "Ngay check-out: " << dinhDangNgay << "/" << dinhDangThang << "/" << dinhDangNam << endl;
+    cout << "Gio check-out: " << dinhDangGio << ":" << dinhDangPhut << endl;
 }
 

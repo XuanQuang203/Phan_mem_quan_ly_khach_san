@@ -8,61 +8,17 @@ string checkIn::dinhDangThoiGian(int value) {
     }
 }
 
-bool checkIn::kt_gio(int _gio) {
-        return _gio >= 0 && _gio <= 23;
-    }
-
-bool checkIn::kt_phut(int _phut) {
-    return _phut >= 0 && _phut <= 59;
-}
-
-bool checkIn::kt_yy(int yy) {
-    return yy >= 2024;
-}
-
-bool checkIn::yy_nhuan(int yy) {
-    return (yy % 4 == 0 && yy % 100 != 0) || (yy % 400 == 0);
-}
-
-int checkIn::kt_mm(int mm, int yy) {
-    switch(mm) {
-        case 1: case 3: case 5: case 7: case 8: case 10: case 12:
-            return 31;
-        case 4: case 6: case 9: case 11:
-            return 30;
-        case 2:
-            return yy_nhuan(yy) ? 29 : 28;
-        default:
-            return 0;
-    }
-}
-
-bool checkIn::kt_dd(int dd, int mm, int yy) {
-    int maxDay = kt_mm(mm, yy);
-    return dd >= 1 && dd <= maxDay;
-}
-
-void checkIn::nhap_checkIn() {
-    do {
-        cout << "Ngay check-in (dd mm yyyy): ";
-        cin >> dmy.ngay >> dmy.thang >> dmy.nam;
-
-        if (!kt_yy(dmy.nam) || !kt_mm(dmy.thang, dmy.nam) || !kt_dd(dmy.ngay, dmy.thang, dmy.nam)) {
-            cout << "Khong hop le, vui long nhap lai!\n";
-            cout << "---------------------\n";
-        }
-    } while (!kt_yy(dmy.nam) || !kt_mm(dmy.thang, dmy.nam) || !kt_dd(dmy.ngay, dmy.thang, dmy.nam));
+void checkIn::nhap_checkIn() {    
+    time_t now = time(0);
+    tm *ltm = localtime(&now);
+    
+    dmy.ngay = ltm->tm_mday;
+    dmy.thang = 1 + ltm->tm_mon;
+    dmy.nam = 1900 + ltm->tm_year;
     ci.ngayVao = dmy;
     
-    do {
-        cout << "Gio check-in (h:min): ";
-        cin >> hms.gio >> hms.phut;
-
-        if (!kt_gio(hms.gio) || !kt_phut(hms.phut)) {
-            cout << "Khong hop le, vui long nhap lai!\n";
-            cout << "---------------------\n";
-        }
-    } while (!kt_gio(hms.gio) || !kt_phut(hms.phut));
+    hms.gio = ltm->tm_hour;
+    hms.phut = ltm->tm_min;
     ci.gioVao = hms;
 }
 
@@ -166,7 +122,7 @@ void checkIn::xuat_checkIn() {
 	string dinhDangThang = dinhDangThoiGian(ci.ngayVao.thang);
 	string dinhDangNam = to_string(ci.ngayVao.nam);
 	
-    cout << "Gio check-in: " << dinhDangGio << ":" << dinhDangPhut << endl;
     cout << "Ngay check-in: " << dinhDangNgay << "/" << dinhDangThang << "/" << dinhDangNam << endl;
+	cout << "Gio check-in: " << dinhDangGio << ":" << dinhDangPhut << endl;
 }
 

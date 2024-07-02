@@ -2,6 +2,8 @@
 #define CHECKOUT_H
 
 #include <iostream>
+#include <string>
+#include <ctime>
 using namespace std;
 
 class checkOut {
@@ -32,14 +34,6 @@ protected:
 
 public:
 	string dinhDangThoiGian(int value);
-	
-	bool kt_gio(int _gio);
-    bool kt_phut(int _phut);
-    
-    bool kt_yy(int yy);
-    bool yy_nhuan(int yy);
-    int kt_mm(int mm, int yy);
-    bool kt_dd(int dd, int mm, int yy);
     
     void nhap_checkOut();
     

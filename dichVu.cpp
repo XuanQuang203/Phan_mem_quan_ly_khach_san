@@ -1,13 +1,15 @@
 #include "dichVu.h"
 
 void dichVu::them_dichVu() {
-    int luaChon;
+    int luaChon, soLuong;
     cout << "\nTHEM DICH VU\n";
-    cout << "---------------------\n";
-    cout << "01. Do an\n";
-    cout << "02. Do uong\n";
-    cout << "03. Khac\n";
-    cout << "---------------------\n";
+    cout << "---------------------------------------------------------\n";
+    cout << "Do an:" << "      01. Mi           02. Com rang     03. Hoa qua\n";
+    cout << "            10.000 vnd       ";
+    cout << "Do uong:    04. Nuoc cam     05. Coca         06. Bia\n";
+    cout << "Khac:       07. Ban chai     08. Khan tam     09. Dau goi";
+    cout << "---------------------------------------------------------\n";
+    
     do {
         cout << "Khach chon: ";
         cin >> luaChon;

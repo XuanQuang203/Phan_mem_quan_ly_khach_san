@@ -85,14 +85,25 @@ class danhSachPhong {
 
         void xuat_danhSachPhong() {
             for (int i = 0; i < 3; i++) {
-                cout << "\nThong tin phong " << i + 1 << endl;
-                cout << "---------------------\n";
-                cout << "So phong: " << dsp[i].soPhong.tang * 100 + dsp[i].soPhong.phong << endl;
-                cout << "Giuong: " << dsp[i].dacDiem.giuong << endl;
-                cout << "Noi that: " << dsp[i].dacDiem.noiThat << endl;
-                cout << "So WC: " << dsp[i].dacDiem.wc << endl;
-                cout << "View: " << dsp[i].dacDiem.view << endl;
-                cout << "Tinh trang: " << dsp[i].tinhTrang << endl;
+//                cout << "\nThong tin phong " << endl;
+//                cout << "--------------------------------------------------\n";
+//                cout << "So phong: " << setw(6) << get_soPhong(i) << setw(10) << get_soPhong(i+1) << setw(10) << get_soPhong(i+2) << endl;
+//                cout << "Giuong: " << setw(8) << dsp[i].dacDiem.giuong << setw(10) << dsp[i+1].dacDiem.giuong << setw(10) << dsp[i+2].dacDiem.giuong << endl;
+//                cout << "Noi that: " << setw(9) << dsp[i].dacDiem.noiThat << setw(8) << dsp[i+1].dacDiem.noiThat << setw(10) << dsp[i+2].dacDiem.noiThat << endl;
+//                cout << "So WC: " << setw(8) << dsp[i].dacDiem.wc << setw(10) << dsp[i+1].dacDiem.wc << setw(10) << dsp[i+2].dacDiem.wc << endl;
+//                cout << "View: " << setw(11) << dsp[i].dacDiem.view << setw(10) << dsp[i+1].dacDiem.view << setw(10) << dsp[i+2].dacDiem.view << endl;
+//                cout << "Tinh trang: " << setw(6) << dsp[i].tinhTrang << setw(10) << dsp[i+1].tinhTrang << setw(10) << dsp[i+2].tinhTrang << endl;
+//                break;
+                
+                cout << "\nThong tin phong " << endl;
+                cout << "--------------------------------------------------\n";
+                cout << "So phong: " << "\t" << get_soPhong(i) << "\t" << get_soPhong(i+1) << "\t" << get_soPhong(i+2) << endl;
+                cout << "Giuong: " << "\t" << dsp[i].dacDiem.giuong << "\t" << dsp[i+1].dacDiem.giuong << "\t" << dsp[i+2].dacDiem.giuong << endl;
+                cout << "Noi that: " << "\t" << dsp[i].dacDiem.noiThat << "\t" << dsp[i+1].dacDiem.noiThat << "\t" << dsp[i+2].dacDiem.noiThat << endl;
+                cout << "So WC: " << "\t\t" << dsp[i].dacDiem.wc << "\t" << dsp[i+1].dacDiem.wc << "\t" << dsp[i+2].dacDiem.wc << endl;
+                cout << "View: " << "\t\t" << dsp[i].dacDiem.view << "\t" << dsp[i+1].dacDiem.view << "\t" << dsp[i+2].dacDiem.view << endl;
+                cout << "Tinh trang: " << "\t" << dsp[i].tinhTrang << "\t" << dsp[i+1].tinhTrang << "\t" << dsp[i+2].tinhTrang << endl;
+                break;
             }
         }
 };

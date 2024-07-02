@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+#include <ctime>
 
 using namespace std;
 
@@ -22,38 +24,86 @@ class thoiGian{
 				: ngay(_ngay), thang (_thang), nam (_nam) {}
 		} dmy;
 		
-		bool kt_gio(int _gio) {
-        	return _gio >= 0 || _gio <= 23;
+	    string dinhDangThoiGian(int value) {
+			if (value < 10) {
+		        return "0" + to_string(value);
+		    } else {
+		        return to_string(value);
+		    }
 		}
 		
-		bool kt_phut(int _phut) {
-			return _phut >= 0 || _phut <= 59;
+		bool kt_yy(int yy) {
+		    time_t now = time(0);
+		    tm *ltm = localtime(&now);
+		    
+		    int _yy = 1900 + ltm->tm_year;
+		    return yy >= _yy;
 		}
-        
-        bool kt_yy(int yy) {
-            return yy >= 2024;
-        }
-
-        bool yy_nhuan(int yy) {
-            return (yy % 4 == 0 && yy % 100 != 0) || (yy % 400 == 0);
-        }
-
-        int kt_mm(int mm, int yy) {
-            switch (mm) {
-                case 1: case 3: case 5: case 7: case 8: case 10: case 12:
-                    return 31;
-                case 4: case 6: case 9: case 11:
-                    return 30;
-                case 2:
-                    return yy_nhuan(yy) ? 29 : 28;
-                default:
-                    return 0;
-            }
-        }
-
-        bool kt_dd(int dd, int mm, int yy) {
-            int maxDay = kt_mm(mm, yy);
-            return dd >= 1 && dd <= maxDay;
-        }
+		
+		bool kt_mm(int yy, int mm) {
+		    time_t now = time(0);
+		    tm *ltm = localtime(&now);
+		    
+		    int _yy = 1900 + ltm->tm_year;
+		    int _mm =  1+ ltm->tm_mon;
+		    
+		    if (yy == _yy) {
+		        return mm >= _mm;
+		    } else if (yy > _yy) {
+		        return true;
+		    }
+		    return false;
+		}
+		
+		bool kt_dd(int yy, int mm, int dd) {
+		    time_t now = time(0);
+		    tm *ltm = localtime(&now);
+		    
+		    int _yy = 1900 + ltm->tm_year;
+		    int _mm = 1 + ltm->tm_mon;
+		    int _dd = ltm->tm_mday;
+		    
+		    if (yy == _yy && mm == _mm) {
+		        return dd >= _dd;
+		    } else if (yy > _yy || (yy == _yy && mm > _mm)) {
+		        return true;
+		    }
+		    return false;
+		}
+		
+		bool kt_h(int yy, int mm, int dd, int h) {
+		    time_t now = time(0);
+		    tm *ltm = localtime(&now);
+		    
+		    int _yy = 1900 + ltm->tm_year;
+		    int _mm = 1 + ltm->tm_mon ;
+		    int _dd = ltm->tm_mday;
+		    int _h = ltm->tm_hour;
+		    
+		    if (yy == _yy && mm == _mm && dd == _dd) {
+		        return h >= _h;
+		    } else if (yy > _yy || (yy == _yy && mm > _mm) || (yy == _yy && mm == _mm && dd > _dd)) {
+		        return true;
+		    }
+		    return false;
+		}
+		
+		bool kt_min(int yy, int mm, int dd, int h, int min) {
+		    time_t now = time(0);
+		    tm *ltm = localtime(&now);
+		    
+		    int _yy = 1900 + ltm->tm_year;
+		    int _mm = 1 + ltm->tm_mon ;
+		    int _dd = ltm->tm_mday;
+		    int _h = ltm->tm_hour;
+		    int _min = ltm->tm_min;
+		    
+		    if (yy == _yy && mm == _mm && dd == _dd && h == _h) {
+		        return min >= _min;
+		    } else if (yy > _yy || (yy == _yy && mm > _mm) || (yy == _yy && mm == _mm && dd > _dd) || (yy == _yy && mm == _mm && dd == _dd && h > _h)) {
+		        return true;
+		    }
+		    return false;
+		}
 };
 

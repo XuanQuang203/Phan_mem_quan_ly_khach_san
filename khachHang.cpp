@@ -158,7 +158,7 @@ public:
 		    string dinhDangThang = dinhDangThoiGian(kh.ngaySinh.thang);
 		    string dinhDangNam = to_string(kh.ngaySinh.nam);
 		    
-		    cout << "Ho ten khach hang: " << kh.hoTen << endl;
+		    cout << "\nHo ten khach hang: " << kh.hoTen << endl;
 		    cout << "Cccd: " << kh.cccd << endl;
 		    cout << "Ngay sinh (dd mm yyyy): " << dinhDangNgay << "/" << dinhDangThang << "/" << dinhDangNam << endl;
 		    cout << "So dien thoai: " << kh.soDienThoai << endl;
@@ -323,19 +323,19 @@ public:
 		
 		void kt_tinhTrangPhong() {
 			if (checkIn::get_ngayVao() == 0 && checkOut::get_ngayRa() == 0) {
-		    	cout << "khach da dat phong\n";
+		    	cout << "\nkhach da dat phong\n";
 				cout << "------------------------------\n\n";
 			}
 			
 		    if (checkIn::get_ngayVao() != 0 && checkOut::get_ngayRa() == 0) {
 		        checkIn::xuat_checkIn();
-		        cout << "khach chua tra phong\n";
+		        cout << "\nkhach chua tra phong\n";
 				cout << "------------------------------\n\n";
 		    }
 		
 		    if (checkOut::get_ngayRa() != 0) {
 		        checkOut::xuat_checkOut();
-		        cout << "khach da thanh toan\n";
+		        cout << "\nkhach da thanh toan\n";
 				cout << "------------------------------\n\n";
 		    }
 		}
