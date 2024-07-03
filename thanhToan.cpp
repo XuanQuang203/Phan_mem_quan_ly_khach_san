@@ -1,37 +1,66 @@
 #include "thanhToan.h"
+#include <ctime>
+#include <iostream>
 
-thanhToan::thanhToan () : soNgayThue (0), soGioThue (0), thanhTien (0) {}
+using namespace std;
 
-void thanhToan::khachThanhToan () {
-    int x, y;
+thanhToan::thanhToan() {}
 
-    x = checkOut::get_ngayRa () - checkIn::get_ngayVao ();
-    if (x == 0) {
-        y = checkOut::get_gioRa () - checkIn::get_gioVao ();
-    } else if (x > 0) {
-        y = (x * 24) + (checkOut::get_gioRa () - checkIn::get_gioVao ());
-    } else {
-        cout << "Loi tinh toan, vui long kiem tra lai thong tin da nhap!\n";
-        return;
-    }
+double thanhToan::chuyenDoiThoiGian() {
+    tm a = {};
+    a.tm_year = get_namVao() - 1900;
+    a.tm_mon = get_thangVao() - 1;
+    a.tm_mday = get_ngayVao();
+    a.tm_hour = get_gioVao();
+    a.tm_min = get_phutVao();
+    a.tm_sec = 0;
+	
+    tm b = {};
+    b.tm_year = get_namRa() - 1900;
+    b.tm_mon = get_thangRa() - 1;
+    b.tm_mday = get_ngayRa();
+    b.tm_hour = get_gioRa();
+    b.tm_min = get_phutRa();
+    b.tm_sec = 0;
 
-    if (y == 0) {
-        cout << "Loi tinh toan, vui long kiem tra lai thong tin da nhap!\n";
-        return;
-    }
+    time_t timeIn = mktime(&a);
+    time_t timeOut = mktime(&b);
 
-    thanhTien = x * giaNgay + y * giaGio;
+    return difftime(timeOut, timeIn);
+}
 
-    cout << "\nHOA DON\n";
+void thanhToan::khachThanhToan() {
+    double thoiGian = chuyenDoiThoiGian();
+    double soPhut = thoiGian / 60;
+    double soGio = thoiGian / 3600;
+    double soNgay = thoiGian / (3600 * 24);
+
+    int ngay = static_cast<int>(soNgay);
+    int gio = static_cast<int>(soGio) - static_cast<int>(soNgay) * 24;
+    int phut = static_cast<int>(soPhut) - static_cast<int>(soGio) * 60;
+
+    cout << "\n\nHOA DON\n";
     cout << "---------------------\n";
     cout << "Thong tin thanh toan: \n";
-    if (x == 0) {
-        cout << "Tong so gio thue: " << y << endl;
-    } else if (x > 0) {
-        cout << "So ngay thue: " << x << endl;
-        cout << "Tong so gio thue: " << y << endl;
+    if (soGio >= 24) {
+        if (phut >= 0 && phut < 30) {
+            thanhTien = ngay * giaNgay + gio * giaGio;
+            cout << "Tong thoi gian thue: " << ngay << " ngay, " << gio << " gio." << endl;
+        } else {
+            thanhTien = ngay * giaNgay + gio * giaGio + 70;
+            cout << "Tong thoi gian thue: " << ngay << " ngay, " << gio << " gio, " << phut << " phut." << endl;
+        }
+    } else {
+        if (phut >= 0 && phut < 30) {
+            thanhTien = gio * giaGio;
+            cout << "Tong thoi gian thue: " << gio << " gio." << endl;
+        } else {
+            thanhTien = gio * giaGio + 70;
+            cout << "Tong thoi gian thue: " << gio << " gio, " << phut << " phut." << endl;
+        }
     }
-    cout << "\nThanh tien: " << thanhTien << " nghin vnd" << endl;
+
+    cout << "Thanh tien: " << thanhTien << " nghin vnd" << endl;
 
     int luaChon;
     cout << "---------------------\n";
@@ -56,6 +85,6 @@ void thanhToan::khachThanhToan () {
     }
 
     cout << "---------------------\n\n";
-    cout << "Cam on quy khach da su dung dich vu! \n----------------------------------------------------\n";
+    cout << "HOAN THANH HOA DON\n----------------------------------------------------\n";
 }
 
