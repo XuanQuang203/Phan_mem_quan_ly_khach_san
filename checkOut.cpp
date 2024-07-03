@@ -22,7 +22,8 @@ void checkOut::nhap_checkOut() {
 	        cout << "\nThoi gian: " << ltm->tm_hour << ":" << ltm->tm_min << " " << ltm->tm_mday << "/" << 1 + ltm->tm_mon << "/" << 1900 + ltm->tm_year;
 	        cout << "\n---------------------";
 	        cout << "\n01. Dong y";
-	        cout << "\n02. Huy bo";
+	        cout << "\n02. Chinh sua";
+	        cout << "\n03. Huy bo";
 	        cout << "\n---------------------";
 	        cout << "\nNhap lua chon: ";
 	        cin >> luaChon;
@@ -40,7 +41,11 @@ void checkOut::nhap_checkOut() {
 				    break;
 				    
 				case 2:
-					cout << "DA HUY YEU CAU\n---------------------\n";
+			    sua_checkOut();
+			    break;
+			    
+				case 3:
+					cout << "Da huy thoi gian check-in!";
 					break;
 			}
 		} while (luaChon <= 0 && luaChon > 2);
@@ -91,14 +96,17 @@ void checkOut::set_namRa(int _namRa){
 void checkOut::sua_checkOut() {
 	int luaChon, sua[5];
 	
-	cout << "\nSUA THOI GIAN CHECK-OUT\n";
+	cout << "\n\nSUA THOI GIAN CHECK-OUT\n";
+	cout << "---------------------\n";
 	cout << "01. Sua gio phut (h:min): \n";
 	cout << "02. Sua ngay thang nam (dd/mm/yyyy): \n";
-	cout << "03. Ca hai (h:min) (dd/mm/yyyy): \n";
+	cout << "03. Ca hai (h:min) (dd/mm/yyyy): \n\n";
 	cout << "00. Thoat chinh sua\n";
+	cout << "---------------------\n";
 	cout << "Nhap lua chon: ";
 	cin >> luaChon;
 	
+	cout << "\n---------------------\n";
 	switch (luaChon) {
 	    case 1:
 	    	cout << "Nhap gio:phut: ";
@@ -155,5 +163,6 @@ void checkOut::xuat_checkOut() {
 	
     cout << "Ngay check-out: " << dinhDangNgay << "/" << dinhDangThang << "/" << dinhDangNam << endl;
     cout << "Gio check-out: " << dinhDangGio << ":" << dinhDangPhut << endl;
+    cout << "---------------------\n";
 }
 

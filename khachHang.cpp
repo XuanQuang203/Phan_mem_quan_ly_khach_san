@@ -81,7 +81,8 @@ class khachHang : public virtual datPhong, public virtual checkIn, public virtua
 		            cout << "khong hop le, vui long nhap lai!\n";
 		            cout << "---------------------\n\n";
 		        }
-		    } while (!kt_yy(dmy.nam) || !kt_mm(dmy.thang, dmy.nam) || !kt_dd(dmy.ngay, dmy.thang, dmy.nam));
+		    } 
+			while (!kt_yy(dmy.nam) || !kt_mm(dmy.thang, dmy.nam) || !kt_dd(dmy.ngay, dmy.thang, dmy.nam));
 		    kh.ngaySinh = dmy;
 		
 		    datPhong::nhap_datPhong();
@@ -186,58 +187,58 @@ class khachHang : public virtual datPhong, public virtual checkIn, public virtua
 		            case 1:
 		                cout << "\nNhap ho ten khach hang: ";
 		                cin.ignore();
-		                fflush(stdin);
 		                getline(cin, kh.hoTen);
 		                break;
 		                
 		            case 2:
 		                cout << "\nNhap cccd khach hang: ";
-		                fflush(stdin);
+		                cin.ignore();
 		                getline(cin, kh.cccd);
 		                break;
 		                
 		            case 3:
 		                do {
 		                    cout << "Nhap ngay sinh (dd mm yyyy): ";
-		                    fflush(stdin);
+		                    cin.ignore();
 		                    cin >> dmy.ngay >> dmy.thang >> dmy.nam;
 		
 		                    if (!kt_yy(dmy.nam) || !kt_mm(dmy.thang, dmy.nam) || !kt_dd(dmy.ngay, dmy.thang, dmy.nam)) {
 		                        cout << "khong hop le, vui long nhap lai!\n";
 		                        cout << "---------------------\n";
 		                    }
-		                } while (!kt_yy(dmy.nam) || !kt_mm(dmy.thang, dmy.nam) || !kt_dd(dmy.ngay, dmy.thang, dmy.nam));
+		                } 
+						while (!kt_yy(dmy.nam) || !kt_mm(dmy.thang, dmy.nam) || !kt_dd(dmy.ngay, dmy.thang, dmy.nam));
 		                break;
 		                
 		            case 4:
 		                cout << "\nNhap SDT khach hang: ";
-		                fflush(stdin);
+		                cin.ignore();
 		                getline(cin, kh.soDienThoai);
 		                break;
 		                
 		            case 5:
-		                cin.ignore();
 		                cout << "\nNhap ho ten khach hang: ";
-		                fflush(stdin);
+		                cin.ignore();
 		                getline(cin, kh.hoTen);
 		
 		                cout << "Nhap cccd khach hang: ";
-		                fflush(stdin);
+		                cin.ignore();
 		                getline(cin, kh.cccd);
 		
 		                do {
 		                    cout << "Nhap ngay sinh (dd mm yyyy): ";
-		                    fflush(stdin);
+		                    cin.ignore();
 		                    cin >> dmy.ngay >> dmy.thang >> dmy.nam;
 		
 		                    if (!kt_yy(dmy.nam) || !kt_mm(dmy.thang, dmy.nam) || !kt_dd(dmy.ngay, dmy.thang, dmy.nam)) {
 		                        cout << "khong hop le, vui long nhap lai!\n";
 		                        cout << "---------------------\n";
 		                    }
-		                } while (!kt_yy(dmy.nam) || !kt_mm(dmy.thang, dmy.nam) || !kt_dd(dmy.ngay, dmy.thang, dmy.nam));
+		                } 
+						while (!kt_yy(dmy.nam) || !kt_mm(dmy.thang, dmy.nam) || !kt_dd(dmy.ngay, dmy.thang, dmy.nam));
 		
 		                cout << "Nhap SDT khach hang: ";
-		                fflush(stdin);
+		                cin.ignore();
 		                getline(cin, kh.soDienThoai);
 		                break;
 		                
@@ -248,7 +249,8 @@ class khachHang : public virtual datPhong, public virtual checkIn, public virtua
 		        cout << "---------------------\n";
 		        cout << "HOAN TAT SUA THONG TIN KHACH HANG!\n";
 		        cout << "----------------------------------------------------\n";
-		    } while (luaChon <= 0 && luaChon > 5);
+		    } 
+			while (luaChon <= 0 && luaChon > 5);
 		}
 		
 		void xoa_khachHang() {
@@ -291,44 +293,8 @@ class khachHang : public virtual datPhong, public virtual checkIn, public virtua
 		                break;
 		            
 		        }
-		    } while (luaChon != 1 && luaChon != 2);
-		}
-
-		
-		void nhap_dp_doiPhong() {
-		    datPhong::nhap_doiPhong();
-		    cout << "\n----------------------------------------------------\n";
-		    cout << "Xac nhan lai thong tin cua khach hang:" << endl;
-		    cout << "---------------------\n";
-		    datPhong::xacNhanLai();
-		}
-		
-		void xuat_dp_doiPhong() {
-		    datPhong::xuat_doiPhong();
-		}
-		
-		void nhap_ci() {
-			checkIn::nhap_checkIn();
-		}
-		
-		void sua_ci() {
-			checkIn::sua_checkIn();
-		}
-		
-		void xuat_ci() {
-			checkIn::xuat_checkIn();
-		}
-		
-		void nhap_co() {
-		    checkOut::nhap_checkOut();
-		}
-		
-		void sua_co() {
-			checkOut::sua_checkOut();
-		}
-		
-		void xuat_co() {
-		    checkOut::xuat_checkOut();
+		    } 
+			while (luaChon != 1 && luaChon != 2);
 		}
 		
 		void kt_tinhTrangPhong() {
@@ -350,14 +316,5 @@ class khachHang : public virtual datPhong, public virtual checkIn, public virtua
 				cout << "------------------------------\n\n";
 		    }
 		}
-		
-		void themDichVu() {
-		    dichVu::them_dichVu();
-		}
-		
-		void khachTraPhong() {
-		    thanhToan::khachThanhToan();
-		}
-
 };
 

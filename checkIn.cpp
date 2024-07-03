@@ -16,10 +16,11 @@ void checkIn::nhap_checkIn() {
     do {
     	cout << "\n\nKHACH HANG CHECK-IN";
         cout << "\n---------------------";
-        cout << "\nThoi gian: " << ltm->tm_hour << ":" << ltm->tm_min << " " << ltm->tm_mday << "/" << 1 + ltm->tm_mon << "/" << 1900 + ltm->tm_year;
+        cout << "\nThoi gian: " << dinhDangThoiGian(ltm->tm_hour) << ":" << dinhDangThoiGian(ltm->tm_min) << " " << dinhDangThoiGian(ltm->tm_mday) << "/" << dinhDangThoiGian(1 + ltm->tm_mon) << "/" << dinhDangThoiGian(1900 + ltm->tm_year);
         cout << "\n---------------------";
         cout << "\n01. Dong y";
-        cout << "\n02. Huy bo";
+        cout << "\n02. Chinh sua";
+        cout << "\n03. Huy bo";
         cout << "\n---------------------";
         cout << "\nNhap lua chon: ";
         cin >> luaChon;
@@ -35,8 +36,13 @@ void checkIn::nhap_checkIn() {
 			    hms.phut = ltm->tm_min;
 			    ci.gioVao = hms;
 			    break;
-			    
+			
 			case 2:
+			    sua_checkIn();
+			    break;
+			    
+			case 3:
+				cout << "Da huy thoi gian check-in!";
 				break;
 		}
 	} while (luaChon <= 0 && luaChon > 2);
@@ -85,14 +91,17 @@ void checkIn::set_namVao(int _namVao) {
 void checkIn::sua_checkIn() {
 	int luaChon, sua[5];
 	
-	cout << "\nSUA THOI GIAN CHECK-IN\n";
+	cout << "\n\nSUA THOI GIAN CHECK-IN\n";
+	cout << "---------------------\n";
 	cout << "01. Sua gio phut (h:min): \n";
 	cout << "02. Sua ngay thang nam (dd/mm/yyyy): \n";
-	cout << "03. Ca hai (h:min) (dd/mm/yyyy): \n";
+	cout << "03. Ca hai (h:min) (dd/mm/yyyy): \n\n";
 	cout << "00. Thoat chinh sua\n";
+	cout << "---------------------\n";
 	cout << "Nhap lua chon: ";
 	cin >> luaChon;
 	
+	cout << "\n---------------------\n";
 	switch (luaChon) {
 	    case 1:
 	    	cout << "Nhap gio:phut: ";
@@ -149,5 +158,6 @@ void checkIn::xuat_checkIn() {
 	
     cout << "Ngay check-in: " << dinhDangNgay << "/" << dinhDangThang << "/" << dinhDangNam << endl;
 	cout << "Gio check-in: " << dinhDangGio << ":" << dinhDangPhut << endl;
+	cout << "---------------------\n";
 }
 

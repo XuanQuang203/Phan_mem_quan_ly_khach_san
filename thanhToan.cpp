@@ -41,7 +41,7 @@ void thanhToan::khachThanhToan() {
 
     cout << "\n\nHOA DON\n";
     cout << "---------------------\n";
-    cout << "Thong tin thanh toan: \n";
+    cout << "Thong tin thanh toan:\n\n";
     if (soGio >= 24) {
         if (phut >= 0 && phut < 30) {
             thanhTien = ngay * giaNgay + gio * giaGio;
@@ -59,8 +59,13 @@ void thanhToan::khachThanhToan() {
             cout << "Tong thoi gian thue: " << gio << " gio, " << phut << " phut." << endl;
         }
     }
-
-    cout << "Thanh tien: " << thanhTien << " nghin vnd" << endl;
+    
+    if (get_phongDaDat() == 102 || get_phongDaDat() == 201) {
+    	thanhTien *= 1,1;
+	}
+	
+	int tien = static_cast<int>(thanhTien);
+    cout << "Thanh tien: " << tien / 1000 << "." << tien % 1000 << ".000 vnd" << endl;
 
     int luaChon;
     cout << "---------------------\n";
@@ -74,17 +79,17 @@ void thanhToan::khachThanhToan() {
         cin >> luaChon;
 
         if (luaChon == 1) {
-            cout << "\nXAC NHAN PHUONG THUC: Tien mat\n";
+            cout << "\n\nXAC NHAN PHUONG THUC: Tien mat\n";
             break;
         } else if (luaChon == 2) {
-            cout << "\nXAC NHAN PHUONG THUC: Chuyen khoan\n";
+            cout << "\n\nXAC NHAN PHUONG THUC: Chuyen khoan\n";
             break;
         } else {
             cout << "Loi nhap, vui long thu lai!\n";
         }
     }
 
-    cout << "---------------------\n\n";
+    cout << "\n---------------------\n\n";
     cout << "HOAN THANH HOA DON\n----------------------------------------------------\n";
 }
 

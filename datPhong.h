@@ -261,6 +261,9 @@ class datPhong : public danhSachPhong {
 	    }
 	
 	    void xacNhanLai() {
+	    	cout << "\n----------------------------------------------------\n";
+		    cout << "Xac nhan lai thong tin cua khach hang:" << endl;
+		    cout << "---------------------\n";
 	        cout << "Khach muon chon phong: " << dp.phongMoi << endl;
 	        cout << "Ly do doi phong cua khach: " << dp.lyDoDoi << endl;
 	    }

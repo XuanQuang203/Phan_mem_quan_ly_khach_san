@@ -3,11 +3,12 @@
 
 #include <iostream>
 #include <iomanip>
+#include <string>
 using namespace std;
 
 class dichVu {
 	public:
-	    void them_dichVu ();
+	    void themDichVu ();
 	    
 	    friend class thanhToan;
 };
