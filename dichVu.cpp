@@ -1,6 +1,6 @@
 #include "dichVu.h"
 
-void dichVu::them_dichVu() {
+void dichVu::them_dichVu () {
     int luaChon, soLuong;
     cout << "\nTHEM DICH VU\n";
     cout << "---------------------------------------------------------\n";
@@ -13,7 +13,7 @@ void dichVu::them_dichVu() {
     do {
         cout << "Khach chon: ";
         cin >> luaChon;
-        switch(luaChon) {
+        switch (luaChon) {
             case 1:
                 // Logic cho Do an
                 break;
@@ -27,6 +27,6 @@ void dichVu::them_dichVu() {
                 cout << "Lua chon khong hop le, vui long chon lai.\n";
                 break;
         }
-    } while(luaChon <= 0 || luaChon > 3);
+    } while (luaChon <= 0 || luaChon > 3);
 }
 

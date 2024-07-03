@@ -14,8 +14,8 @@ class danhSachPhong {
 
             dacDiemPhong() {}
 
-            dacDiemPhong(string _giuong, string _noiThat, string _wc, string _view)
-                : giuong(_giuong), noiThat(_noiThat), wc(_wc), view(_view) {}
+            dacDiemPhong(string _giuong, string _noiThat, string _wc, string _view):
+				giuong(_giuong), noiThat(_noiThat), wc(_wc), view(_view) {}
         };
 
         struct maPhong {
@@ -23,8 +23,8 @@ class danhSachPhong {
 
             maPhong() {}
 
-            maPhong(int _tang, int _phong)
-                : tang(_tang), phong(_phong) {}
+            maPhong(int _tang, int _phong):
+				tang(_tang), phong(_phong) {}
         };
 
         struct thongTinPhong {
@@ -34,8 +34,8 @@ class danhSachPhong {
 
             thongTinPhong() {}
 
-            thongTinPhong(maPhong _soPhong, dacDiemPhong _dacDiem, string _tinhTrang)
-                : soPhong(_soPhong), dacDiem(_dacDiem), tinhTrang(_tinhTrang) {}
+            thongTinPhong(maPhong _soPhong, dacDiemPhong _dacDiem, string _tinhTrang):
+				soPhong(_soPhong), dacDiem(_dacDiem), tinhTrang(_tinhTrang) {}
         } dsp[3];
 
     public:
@@ -54,7 +54,7 @@ class danhSachPhong {
 
         void nhap_danhSachPhong() {
             int i;
-            cout << "\nNhap ma phong can sua (1, 2, 3): ";
+            cout << "\nNhap ma phong can sua(1, 2, 3): ";
             cin >> i;
 
             if (i <= 0 || i > 3) {
@@ -84,7 +84,7 @@ class danhSachPhong {
         }
 
         void xuat_danhSachPhong() {
-            for (int i = 0; i < 3; i++) {
+            for(int i = 0; i < 3; i++) {
 //                cout << "\nThong tin phong " << endl;
 //                cout << "--------------------------------------------------\n";
 //                cout << "So phong: " << setw(6) << get_soPhong(i) << setw(10) << get_soPhong(i+1) << setw(10) << get_soPhong(i+2) << endl;

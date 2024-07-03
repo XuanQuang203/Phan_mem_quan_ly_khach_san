@@ -9,17 +9,43 @@ string checkOut::dinhDangThoiGian(int value) {
 }
 
 void checkOut::nhap_checkOut() {
-    time_t now = time(0);
-    tm *ltm = localtime(&now);
+	if (checkIn::get_ngayVao() == 0) {
+		cout << "\nKhach chua check-in, vui long nhap check-in truoc!/n";
+	} else {
+		int luaChon;
+		time_t now = time(0);
+		tm *ltm = localtime(&now);
+		
+	    do {
+	    	cout << "\n\nKHACH HANG CHECK-OUT";
+	        cout << "\n---------------------";
+	        cout << "\nThoi gian: " << ltm->tm_hour << ":" << ltm->tm_min << " " << ltm->tm_mday << "/" << 1 + ltm->tm_mon << "/" << 1900 + ltm->tm_year;
+	        cout << "\n---------------------";
+	        cout << "\n01. Dong y";
+	        cout << "\n02. Huy bo";
+	        cout << "\n---------------------";
+	        cout << "\nNhap lua chon: ";
+	        cin >> luaChon;
+		    
+		    switch (luaChon) {
+		    	case 1:
+				    dmy.ngay = ltm->tm_mday;
+				    dmy.thang = 1 + ltm->tm_mon;
+				    dmy.nam = 1900 + ltm->tm_year;
+				    co.ngayRa = dmy;
+				    
+				    hms.gio = ltm->tm_hour;
+				    hms.phut = ltm->tm_min;
+				    co.gioRa = hms;
+				    break;
+				    
+				case 2:
+					cout << "DA HUY YEU CAU\n---------------------\n";
+					break;
+			}
+		} while (luaChon <= 0 && luaChon > 2);
+	}
     
-    dmy.ngay = ltm->tm_mday;
-    dmy.thang = 1 + ltm->tm_mon;
-    dmy.nam = 1900 + ltm->tm_year;
-    co.ngayRa = dmy;
-    
-    hms.gio = ltm->tm_hour;
-    hms.phut = ltm->tm_min;
-    co.gioRa = hms;
 }
 
 int checkOut::get_gioRa() {
@@ -64,6 +90,7 @@ void checkOut::set_namRa(int _namRa){
 
 void checkOut::sua_checkOut() {
 	int luaChon, sua[5];
+	
 	cout << "\nSUA THOI GIAN CHECK-OUT\n";
 	cout << "01. Sua gio phut (h:min): \n";
 	cout << "02. Sua ngay thang nam (dd/mm/yyyy): \n";
@@ -72,7 +99,7 @@ void checkOut::sua_checkOut() {
 	cout << "Nhap lua chon: ";
 	cin >> luaChon;
 	
-	switch(luaChon) {
+	switch (luaChon) {
 	    case 1:
 	    	cout << "Nhap gio:phut: ";
 	    	cin >> sua[0] >> sua[1];
@@ -102,6 +129,10 @@ void checkOut::sua_checkOut() {
 	    	break;
 	    	
 	    case 0:
+	    	break;
+	    	
+	    default:
+	    	cout << "\nLoi nhap lua chon, vui long thu lai!\n";
 	    	break;
 	}
 }

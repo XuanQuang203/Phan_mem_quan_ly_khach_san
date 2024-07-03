@@ -1,28 +1,28 @@
 #include "datPhong.h"
 #include "thanhToan.h"
 
-class khachHang : public virtual datPhong, public virtual checkIn, public virtual checkOut, public virtual dichVu, public virtual thanhToan{
-private:
-    struct ngayThangNam {
-        int ngay, thang, nam;
+class khachHang : public virtual datPhong, public virtual checkIn, public virtual checkOut, public virtual dichVu, public virtual thanhToan {
+	private:
+	    struct ngayThangNam {
+	        int ngay, thang, nam;
+	
+	        ngayThangNam() {}
+	
+	        ngayThangNam(int _ngay, int _thang, int _nam):
+				ngay(_ngay), thang(_thang), nam(_nam) {}
+	    } dmy;
+	
+	    struct thongTinkhach {
+	        string cccd, soDienThoai, hoTen;
+	        ngayThangNam ngaySinh;
+	
+	        thongTinkhach() {}
+	
+	        thongTinkhach(string _cccd, string _soDienThoai, string _hoTen, ngayThangNam _ngaySinh):
+				hoTen(_hoTen), cccd(_cccd), ngaySinh(_ngaySinh), soDienThoai(_soDienThoai) {}
+	    } kh;
 
-        ngayThangNam() {}
-
-        ngayThangNam(int _ngay, int _thang, int _nam)
-            : ngay(_ngay), thang(_thang), nam(_nam) {}
-    } dmy;
-
-    struct thongTinkhach {
-        string cccd, soDienThoai, hoTen;
-        ngayThangNam ngaySinh;
-
-        thongTinkhach() {}
-
-        thongTinkhach(string _cccd, string _soDienThoai, string _hoTen, ngayThangNam _ngaySinh)
-            : hoTen(_hoTen), cccd(_cccd), ngaySinh(_ngaySinh), soDienThoai(_soDienThoai) {}
-    } kh;
-
-public:
+	public:
 		khachHang() {}
 		
 		~khachHang() {}
@@ -168,6 +168,7 @@ public:
 		
 		void sua_khachHang(int &n) {
 		    int luaChon;
+		    
 		    do {
 		        cout << "\n\nSUA THONG TIN KHACH HANG";
 		        cout << "\n---------------------";
@@ -241,10 +242,11 @@ public:
 		                break;
 		                
 		            default:
+		            	cout << "Lua chon khong hop le, vui long nhap lai!\n";
 		                break;
 		        }
 		        cout << "---------------------\n";
-		        cout << "DA SUA THONG TIN KHACH HANG!\n";
+		        cout << "HOAN TAT SUA THONG TIN KHACH HANG!\n";
 		        cout << "----------------------------------------------------\n";
 		    } while (luaChon <= 0 && luaChon > 5);
 		}
@@ -252,38 +254,46 @@ public:
 		void xoa_khachHang() {
 		    int luaChon;
 		
-		    cout << "\n\nXAC NHAN XOA?";
-		    cout << "\n---------------------";
-		    cout << "\n01. Xac nhan";
-		    cout << "\n02. Huy";
-		    cout << "\n---------------------";
-			nhapLai:
-		    cout << "\nNhap lua chon: ";
-		    cin >> luaChon;
+		    do {
+		        cout << "\n\nXAC NHAN XOA?";
+		        cout << "\n---------------------";
+		        cout << "\n01. Xac nhan";
+		        cout << "\n02. Huy";
+		        cout << "\n---------------------";
+		        cout << "\nNhap lua chon: ";
+		        cin >> luaChon;
 		
-		    if (luaChon == 1) {
-		        kh.hoTen = "0";
-		        kh.cccd = "0";
-		        kh.soDienThoai = "0";
-		        dmy.ngay = 0;
-		        dmy.thang = 0;
-		        dmy.nam = 0;
-		        kh.ngaySinh = dmy;
+		        switch (luaChon) {
+		            case 1:
+		                kh.hoTen = "0";
+		                kh.cccd = "0";
+		                kh.soDienThoai = "0";
+		                dmy.ngay = 0;
+		                dmy.thang = 0;
+		                dmy.nam = 0;
+		                kh.ngaySinh = dmy;
 		
-		        datPhong::xoa_datPhong();
-		        checkIn::xoa_checkIn();
-		        checkOut::xoa_checkOut();
+		                datPhong::xoa_datPhong();
+		                checkIn::xoa_checkIn();
+		                checkOut::xoa_checkOut();
 		
-		        cout << "\nDA XOA THONG TIN KHACH HANG!\n";
-		        cout << "----------------------------------------------------\n";
-		    } else if (luaChon == 2) {
-		        cout << "\nDA HUY YEU CAU XOA THONG TIN\n";
-		        cout << "----------------------------------------------------\n";
-		    } else {
-		        cout << "Vui long chon lai!";
-		        goto nhapLai;
-		    }
+		                cout << "\nDA XOA THONG TIN KHACH HANG!\n";
+		                cout << "----------------------------------------------------\n";
+		                break;
+		            
+		            case 2:
+		                cout << "\nDA HUY YEU CAU XOA THONG TIN\n";
+		                cout << "----------------------------------------------------\n";
+		                break;
+		            
+		            default: 
+		                cout << "Vui long chon lai!\n";
+		                break;
+		            
+		        }
+		    } while (luaChon != 1 && luaChon != 2);
 		}
+
 		
 		void nhap_dp_doiPhong() {
 		    datPhong::nhap_doiPhong();
@@ -323,19 +333,20 @@ public:
 		
 		void kt_tinhTrangPhong() {
 			if (checkIn::get_ngayVao() == 0 && checkOut::get_ngayRa() == 0) {
-		    	cout << "\nkhach da dat phong\n";
+		    	cout << "\nKhach da dat phong\n";
 				cout << "------------------------------\n\n";
 			}
 			
 		    if (checkIn::get_ngayVao() != 0 && checkOut::get_ngayRa() == 0) {
 		        checkIn::xuat_checkIn();
-		        cout << "\nkhach chua tra phong\n";
+		        cout << "\nKhach chua tra phong\n";
 				cout << "------------------------------\n\n";
 		    }
 		
 		    if (checkOut::get_ngayRa() != 0) {
+		    	checkIn::xuat_checkIn();
 		        checkOut::xuat_checkOut();
-		        cout << "\nkhach da thanh toan\n";
+		        cout << "\nKhach da thanh toan\n";
 				cout << "------------------------------\n\n";
 		    }
 		}

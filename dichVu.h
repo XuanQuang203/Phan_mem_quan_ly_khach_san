@@ -6,10 +6,10 @@
 using namespace std;
 
 class dichVu {
-public:
-    void them_dichVu();
-    
-    friend class thanhToan;
+	public:
+	    void them_dichVu ();
+	    
+	    friend class thanhToan;
 };
 
 #endif //DICHVU_H

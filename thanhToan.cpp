@@ -1,15 +1,15 @@
 #include "thanhToan.h"
 
-thanhToan::thanhToan() : soNgayThue(0), soGioThue(0), thanhTien(0) {}
+thanhToan::thanhToan () : soNgayThue (0), soGioThue (0), thanhTien (0) {}
 
-void thanhToan::khachThanhToan() {
+void thanhToan::khachThanhToan () {
     int x, y;
 
-    x = checkOut::get_ngayRa() - checkIn::get_ngayVao();
+    x = checkOut::get_ngayRa () - checkIn::get_ngayVao ();
     if (x == 0) {
-        y = checkOut::get_gioRa() - checkIn::get_gioVao();
+        y = checkOut::get_gioRa () - checkIn::get_gioVao ();
     } else if (x > 0) {
-        y = (x * 24) + (checkOut::get_gioRa() - checkIn::get_gioVao());
+        y = (x * 24) + (checkOut::get_gioRa () - checkIn::get_gioVao ());
     } else {
         cout << "Loi tinh toan, vui long kiem tra lai thong tin da nhap!\n";
         return;

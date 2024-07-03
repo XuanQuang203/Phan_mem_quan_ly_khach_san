@@ -7,56 +7,58 @@
 using namespace std;
 
 class checkIn {
-protected:
-	struct gioPhutGiay {
-        int gio, phut, giay;
-
-        gioPhutGiay() {}
-
-        gioPhutGiay(int _gio, int _phut, int _giay)
-            : gio(_gio), phut(_phut), giay(_giay) {}
-    } hms;
+	protected:
+		struct gioPhutGiay {
+	        int gio, phut, giay;
 	
-    struct ngayThangNam {
-        int ngay, thang, nam;
-
-        ngayThangNam() {}
-        ngayThangNam(int _ngay, int _thang, int _nam) : ngay(_ngay), thang(_thang), nam(_nam) {}
-    } dmy;
-
-    struct thoiGianCI {
-        ngayThangNam ngayVao;
-        gioPhutGiay gioVao;
-
-        thoiGianCI() {}
-        thoiGianCI(ngayThangNam _ngayVao, gioPhutGiay _gioVao) : ngayVao(_ngayVao), gioVao(_gioVao) {}
-    } ci;
-
-public:
-	string dinhDangThoiGian(int value);
+	        gioPhutGiay() {}
 	
-    void nhap_checkIn();
-    
-    int get_gioVao();
-    void set_gioVao(int _gioVao);
-    
-	int get_phutVao();
-	void set_phutVao(int _phutVao);
+	        gioPhutGiay(int _gio, int _phut, int _giay):
+				gio(_gio), phut(_phut), giay(_giay) {}
+	    } hms;
+		
+	    struct ngayThangNam {
+	        int ngay, thang, nam;
 	
-	int get_ngayVao();
-	void set_ngayVao(int _ngayVao);
+	        ngayThangNam() {}
+	        ngayThangNam (int _ngay, int _thang, int _nam):
+				ngay (_ngay), thang (_thang), nam (_nam) {}
+	    } dmy;
 	
-	int get_thangVao();
-	void set_thangVao(int _thangVao);
+	    struct thoiGianCI {
+	        ngayThangNam ngayVao;
+	        gioPhutGiay gioVao;
 	
-	int get_namVao();
-	void set_namVao(int _namVao);
+	        thoiGianCI() {}
+	        thoiGianCI(ngayThangNam _ngayVao, gioPhutGiay _gioVao):
+				ngayVao(_ngayVao), gioVao(_gioVao) {}
+	    } ci;
 	
-    void sua_checkIn();
-    void xoa_checkIn();
-    void xuat_checkIn();
-    
-    friend class thanhToan;
+	public:
+		string dinhDangThoiGian(int value);
+		
+	    void nhap_checkIn();
+	    
+	    int get_gioVao();
+	    void set_gioVao(int _gioVao);
+	    
+		int get_phutVao();
+		void set_phutVao(int _phutVao);
+		
+		int get_ngayVao();
+		void set_ngayVao(int _ngayVao);
+		
+		int get_thangVao();
+		void set_thangVao(int _thangVao);
+		
+		int get_namVao();
+		void set_namVao(int _namVao);
+		
+	    void sua_checkIn();
+	    void xoa_checkIn();
+	    void xuat_checkIn();
+	    
+	    friend class thanhToan;
 };
 
 #endif //CHECKIN_H
