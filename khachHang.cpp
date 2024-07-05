@@ -153,6 +153,10 @@ class khachHang : public virtual datPhong, public virtual checkIn, public virtua
 		    kh.soDienThoai = _soDienThoai;
 		}
 		
+		string maKhachHang() {		
+			return dinhDangThoiGian(datPhong::get_ngayDatPhong()) + dinhDangThoiGian(datPhong::get_thangDatPhong()) + dinhDangThoiGian(datPhong::get_namDatPhong() - 2000) + get_cccd();
+		}
+		
 		void xuat_khachHang() {
 		    chuanHoaChu();
 		    string dinhDangNgay = dinhDangThoiGian(kh.ngaySinh.ngay);
