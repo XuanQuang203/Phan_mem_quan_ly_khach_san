@@ -2,8 +2,10 @@
 #define CHECKIN_H
 
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <ctime>
+
 using namespace std;
 
 class checkIn {
@@ -13,16 +15,14 @@ class checkIn {
 	
 	        gioPhutGiay() {}
 	
-	        gioPhutGiay(int _gio, int _phut, int _giay):
-				gio(_gio), phut(_phut), giay(_giay) {}
+	        gioPhutGiay(int _gio, int _phut, int _giay) : gio(_gio), phut(_phut), giay(_giay) {}
 	    } hms;
 		
 	    struct ngayThangNam {
 	        int ngay, thang, nam;
 	
 	        ngayThangNam() {}
-	        ngayThangNam (int _ngay, int _thang, int _nam):
-				ngay (_ngay), thang (_thang), nam (_nam) {}
+	        ngayThangNam (int _ngay, int _thang, int _nam) : ngay (_ngay), thang (_thang), nam (_nam) {}
 	    } dmy;
 	
 	    struct thoiGianCI {
@@ -30,12 +30,11 @@ class checkIn {
 	        gioPhutGiay gioVao;
 	
 	        thoiGianCI() {}
-	        thoiGianCI(ngayThangNam _ngayVao, gioPhutGiay _gioVao):
-				ngayVao(_ngayVao), gioVao(_gioVao) {}
+	        thoiGianCI(ngayThangNam _ngayVao, gioPhutGiay _gioVao) : ngayVao(_ngayVao), gioVao(_gioVao) {}
 	    } ci;
 	
 	public:
-		string dinhDangThoiGian(int value);
+		string dinhDangThoiGian(int i);
 		
 	    void nhap_checkIn();
 	    
@@ -56,7 +55,7 @@ class checkIn {
 		
 	    void sua_checkIn();
 	    void xoa_checkIn();
-	    void xuat_checkIn();
+	    void xuat_checkIn(ostream &os);
 	    
 	    friend class thanhToan;
 };

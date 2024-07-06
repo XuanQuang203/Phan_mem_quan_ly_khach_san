@@ -2,10 +2,12 @@
 #define CHECKOUT_H
 
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <ctime>
 
 #include "checkIn.h"
+
 using namespace std;
 
 class checkOut : public virtual checkIn {
@@ -15,16 +17,14 @@ class checkOut : public virtual checkIn {
 	
 	        gioPhutGiay() {}
 	
-	        gioPhutGiay(int _gio, int _phut, int _giay):
-				gio(_gio), phut(_phut), giay(_giay) {}
+	        gioPhutGiay(int _gio, int _phut, int _giay) : gio(_gio), phut(_phut), giay(_giay) {}
 	    } hms;
 		
 	    struct ngayThangNam {
 	        int ngay, thang, nam;
 	
 	        ngayThangNam() {}
-	        ngayThangNam(int _ngay, int _thang, int _nam):
-	        	ngay(_ngay), thang(_thang), nam(_nam) {}
+	        ngayThangNam(int _ngay, int _thang, int _nam) : ngay(_ngay), thang(_thang), nam(_nam) {}
 	    } dmy;
 	
 	    struct thoiGianCO {
@@ -32,12 +32,11 @@ class checkOut : public virtual checkIn {
 	        gioPhutGiay gioRa;
 	
 	        thoiGianCO() {}
-	        thoiGianCO(ngayThangNam _ngayRa, gioPhutGiay _gioRa):
-				ngayRa(_ngayRa), gioRa(_gioRa) {}
+	        thoiGianCO(ngayThangNam _ngayRa, gioPhutGiay _gioRa) : ngayRa(_ngayRa), gioRa(_gioRa) {}
 	    } co;
 	
 	public:
-		string dinhDangThoiGian(int value);
+		string dinhDangThoiGian(int i);
 	    
 	    void nhap_checkOut();
 	    
@@ -55,7 +54,7 @@ class checkOut : public virtual checkIn {
 	    
 	    void sua_checkOut();
 	    void xoa_checkOut();
-	    void xuat_checkOut();
+	    void xuat_checkOut(ostream &os);
 	
 	    friend class thanhToan;
 };

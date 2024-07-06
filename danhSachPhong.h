@@ -14,8 +14,7 @@ class danhSachPhong {
 
             dacDiemPhong() {}
 
-            dacDiemPhong(string _giuong, string _noiThat, string _wc, string _view):
-				giuong(_giuong), noiThat(_noiThat), wc(_wc), view(_view) {}
+            dacDiemPhong(string _giuong, string _noiThat, string _wc, string _view) : giuong(_giuong), noiThat(_noiThat), wc(_wc), view(_view) {}
         };
 
         struct maPhong {
@@ -23,8 +22,7 @@ class danhSachPhong {
 
             maPhong() {}
 
-            maPhong(int _tang, int _phong):
-				tang(_tang), phong(_phong) {}
+            maPhong(int _tang, int _phong) : tang(_tang), phong(_phong) {}
         };
 
         struct thongTinPhong {
@@ -34,8 +32,7 @@ class danhSachPhong {
 
             thongTinPhong() {}
 
-            thongTinPhong(maPhong _soPhong, dacDiemPhong _dacDiem, string _tinhTrang):
-				soPhong(_soPhong), dacDiem(_dacDiem), tinhTrang(_tinhTrang) {}
+            thongTinPhong(maPhong _soPhong, dacDiemPhong _dacDiem, string _tinhTrang) : soPhong(_soPhong), dacDiem(_dacDiem), tinhTrang(_tinhTrang) {}
         } dsp[3];
 
     public:

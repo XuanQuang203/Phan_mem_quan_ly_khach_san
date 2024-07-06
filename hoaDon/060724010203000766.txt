@@ -1,0 +1,32 @@
+----------------------------------------------------
+HOA DON
+---------------------
+Ma khach hang: 060724010203000766
+
+Ho ten khach hang: Nguyen Xuan Quang
+Cccd: 010203000766
+Ngay sinh (dd mm yyyy): 28/12/2003
+So dien thoai: 0343711202
+---------------------
+Phong duoc dat: 102
+Ngay dat phong (dd mm yyyy): 06/07/2024
+Gio dat phong (h:min): 15:40
+---------------------
+Ngay check-in: 06/07/2024
+Gio check-in: 15:33
+---------------------
+Ngay check-out: 06/07/2024
+Gio check-out: 16:33
+---------------------
+Mi: 30.000 vnd
+Hoa qua: 100.000 vnd
+Coca: 60.000 vnd
+
+So tien cac dich vu phat sinh: 190.000 vnd
+---------------------
+Tong thoi gian thue: 1 gio.
+Tong so tien: 440.000 vnd
+---------------------
+
+Cam on quy khach da su dung dich vu!
+----------------------------------------------------

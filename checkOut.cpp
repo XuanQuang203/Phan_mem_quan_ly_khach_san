@@ -1,10 +1,10 @@
 #include "checkOut.h"
 
-string checkOut::dinhDangThoiGian(int value) {
-	if (value < 10) {
-        return "0" + to_string(value);
+string checkOut::dinhDangThoiGian(int i) {
+	if (i < 10) {
+        return "0" + to_string(i);
     } else {
-        return to_string(value);
+        return to_string(i);
     }
 }
 
@@ -19,7 +19,7 @@ void checkOut::nhap_checkOut() {
 	    do {
 	    	cout << "\n\nKHACH HANG CHECK-OUT";
 	        cout << "\n---------------------";
-	        cout << "\nThoi gian: " << ltm->tm_hour << ":" << ltm->tm_min << " " << ltm->tm_mday << "/" << 1 + ltm->tm_mon << "/" << 1900 + ltm->tm_year;
+	        cout << "\nThoi gian: " << dinhDangThoiGian(ltm->tm_hour) << ":" << dinhDangThoiGian(ltm->tm_min) << " " << dinhDangThoiGian(ltm->tm_mday) << "/" << dinhDangThoiGian(1 + ltm->tm_mon) << "/" << dinhDangThoiGian(1900 + ltm->tm_year);
 	        cout << "\n---------------------";
 	        cout << "\n01. Dong y";
 	        cout << "\n02. Chinh sua";
@@ -98,51 +98,18 @@ void checkOut::sua_checkOut() {
 	
 	cout << "\n\nSUA THOI GIAN CHECK-OUT\n";
 	cout << "---------------------\n";
-	cout << "01. Sua gio phut (h:min): \n";
-	cout << "02. Sua ngay thang nam (dd/mm/yyyy): \n";
-	cout << "03. Ca hai (h:min) (dd/mm/yyyy): \n\n";
-	cout << "00. Thoat chinh sua\n";
-	cout << "---------------------\n";
-	cout << "Nhap lua chon: ";
-	cin >> luaChon;
-	
-	cout << "\n---------------------\n";
-	switch (luaChon) {
-	    case 1:
-	    	cout << "Nhap gio:phut: ";
-	    	cin >> sua[0] >> sua[1];
-	        set_gioRa(sua[0]);
-	        set_phutRa(sua[1]);
-	    	break;
-	        
-	    case 2:
-	        cout << "Nhap ngay/thang/nam: ";
-	    	cin >> sua[0] >> sua[1] >> sua[2];
-	        set_ngayRa(sua[0]);
-	        set_thangRa(sua[1]);
-	        set_namRa(sua[2]);
-	    	break;
-	    
-		case 3:	
-		    cout << "Nhap gio:phut: ";
-	    	cin >> sua[0] >> sua[1];
-	        set_gioRa(sua[0]);
-	        set_phutRa(sua[1]);
-	        
-	        cout << "Nhap ngay/thang/nam: ";
-	    	cin >> sua[2] >> sua[3] >> sua[4];
-	        set_ngayRa(sua[2]);
-	        set_thangRa(sua[3]);
-	        set_namRa(sua[4]);
-	    	break;
-	    	
-	    case 0:
-	    	break;
-	    	
-	    default:
-	    	cout << "\nLoi nhap lua chon, vui long thu lai!\n";
-	    	break;
-	}
+    cout << "Nhap gio:phut: ";
+    cin.ignore();
+	cin >> sua[0] >> sua[1];
+    set_gioRa(sua[0]);
+    set_phutRa(sua[1]);
+    
+    cout << "Nhap ngay/thang/nam: ";
+	cin >> sua[2] >> sua[3] >> sua[4];
+    set_ngayRa(sua[2]);
+    set_thangRa(sua[3]);
+    set_namRa(sua[4]);
+    cout << "---------------------\n";
 }
 
 void checkOut::xoa_checkOut() {
@@ -153,7 +120,7 @@ void checkOut::xoa_checkOut() {
     co.ngayRa.nam = 0;
 }
 
-void checkOut::xuat_checkOut() {
+void checkOut::xuat_checkOut(ostream &os) {
 	string dinhDangGio = dinhDangThoiGian(co.gioRa.gio);
 	string dinhDangPhut = dinhDangThoiGian(co.gioRa.phut);
 	
@@ -161,8 +128,8 @@ void checkOut::xuat_checkOut() {
 	string dinhDangThang = dinhDangThoiGian(co.ngayRa.thang);
 	string dinhDangNam = to_string(co.ngayRa.nam);
 	
-    cout << "Ngay check-out: " << dinhDangNgay << "/" << dinhDangThang << "/" << dinhDangNam << endl;
-    cout << "Gio check-out: " << dinhDangGio << ":" << dinhDangPhut << endl;
-    cout << "---------------------\n";
+    os << "Ngay check-out: " << dinhDangNgay << "/" << dinhDangThang << "/" << dinhDangNam << endl;
+    os << "Gio check-out: " << dinhDangGio << ":" << dinhDangPhut << endl;
+    os << "---------------------\n";
 }
 

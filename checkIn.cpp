@@ -1,10 +1,10 @@
 #include "checkIn.h"
 
-string checkIn::dinhDangThoiGian(int value) {
-	if (value < 10) {
-        return "0" + to_string (value);
+string checkIn::dinhDangThoiGian(int i) {
+	if (i < 10) {
+        return "0" + to_string (i);
     } else {
-        return to_string (value);
+        return to_string (i);
     }
 }
 
@@ -93,51 +93,18 @@ void checkIn::sua_checkIn() {
 	
 	cout << "\n\nSUA THOI GIAN CHECK-IN\n";
 	cout << "---------------------\n";
-	cout << "01. Sua gio phut (h:min): \n";
-	cout << "02. Sua ngay thang nam (dd/mm/yyyy): \n";
-	cout << "03. Ca hai (h:min) (dd/mm/yyyy): \n\n";
-	cout << "00. Thoat chinh sua\n";
-	cout << "---------------------\n";
-	cout << "Nhap lua chon: ";
-	cin >> luaChon;
-	
-	cout << "\n---------------------\n";
-	switch (luaChon) {
-	    case 1:
-	    	cout << "Nhap gio:phut: ";
-	    	cin >> sua[0] >> sua[1];
-	        set_gioVao(sua[0]);
-	        set_phutVao(sua[1]);
-	    	break;
-	        
-	    case 2:
-	        cout << "Nhap ngay/thang/nam: ";
-	    	cin >> sua[0] >> sua[1] >> sua[2];
-	        set_ngayVao(sua[0]);
-	        set_thangVao(sua[1]);
-	        set_namVao(sua[2]);
-	    	break;
-	    
-		case 3:	
-		    cout << "Nhap gio:phut: ";
-	    	cin >> sua[0] >> sua[1];
-	        set_gioVao(sua[0]);
-	        set_phutVao(sua[1]);
-	        
-	        cout << "Nhap ngay/thang/nam: ";
-	    	cin >> sua[2] >> sua[3] >> sua[4];
-	        set_ngayVao(sua[2]);
-	        set_thangVao(sua[3]);
-	        set_namVao(sua[4]);
-	    	break;
-	    	
-	    case 0:
-	    	break;
-	    	
-	    default:
-	    	cout << "\nLoi nhap lua chon, vui long thu lai!\n";
-	    	break;
-	}
+    cout << "Nhap gio:phut: ";
+    cin.ignore();
+	cin >> sua[0] >> sua[1];
+    set_gioVao(sua[0]);
+    set_phutVao(sua[1]);
+    
+    cout << "Nhap ngay/thang/nam: ";
+	cin >> sua[2] >> sua[3] >> sua[4];
+    set_ngayVao(sua[2]);
+    set_thangVao(sua[3]);
+    set_namVao(sua[4]);
+    cout << "---------------------\n";
 }
 
 void checkIn::xoa_checkIn() {
@@ -148,7 +115,7 @@ void checkIn::xoa_checkIn() {
     ci.ngayVao.nam = 0;
 }
 
-void checkIn::xuat_checkIn() {
+void checkIn::xuat_checkIn(ostream &os) {
 	string dinhDangGio = dinhDangThoiGian(ci.gioVao.gio);
 	string dinhDangPhut = dinhDangThoiGian(ci.gioVao.phut);
 	
@@ -156,8 +123,8 @@ void checkIn::xuat_checkIn() {
 	string dinhDangThang = dinhDangThoiGian(ci.ngayVao.thang);
 	string dinhDangNam = to_string(ci.ngayVao.nam);
 	
-    cout << "Ngay check-in: " << dinhDangNgay << "/" << dinhDangThang << "/" << dinhDangNam << endl;
-	cout << "Gio check-in: " << dinhDangGio << ":" << dinhDangPhut << endl;
-	cout << "---------------------\n";
+    os << "Ngay check-in: " << dinhDangNgay << "/" << dinhDangThang << "/" << dinhDangNam << endl;
+	os << "Gio check-in: " << dinhDangGio << ":" << dinhDangPhut << endl;
+	os << "---------------------\n";
 }
 

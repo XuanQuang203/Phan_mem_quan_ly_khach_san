@@ -1,6 +1,7 @@
 #ifndef DATPHONG_H
 #define DATPHONG_H
 
+#include <fstream>
 #include <ctime>
 #include "danhSachPhong.h"
 #pragma once
@@ -12,8 +13,7 @@ class datPhong : public danhSachPhong {
 	
 	        gioPhutGiay(): gio(0), phut(0), giay(0) {}
 	
-	        gioPhutGiay(int _gio, int _phut, int _giay):
-				gio(_gio), phut(_phut), giay(_giay) {}
+	        gioPhutGiay(int _gio, int _phut, int _giay) : gio(_gio), phut(_phut), giay(_giay) {}
 	    } hms;
 	
 	    struct ngayThangNam {
@@ -21,8 +21,7 @@ class datPhong : public danhSachPhong {
 	
 	        ngayThangNam() : ngay(0), thang(0), nam(0) {}
 	
-	        ngayThangNam(int _ngay, int _thang, int _nam):
-				ngay(_ngay), thang(_thang), nam(_nam) {}
+	        ngayThangNam(int _ngay, int _thang, int _nam) : ngay(_ngay), thang(_thang), nam(_nam) {}
 	    } dmy;
 	
 	    struct thongTinDatPhong {
@@ -34,17 +33,16 @@ class datPhong : public danhSachPhong {
 	
 	        thongTinDatPhong() : phongDaDat(0), phongMoi(0) {}
 	
-	        thongTinDatPhong(int _phongDaDat, gioPhutGiay _gioPhut, ngayThangNam _ngayDatPhong, int _phongMoi, string _lyDoDoi):
-				phongDaDat(_phongDaDat), gioPhut(_gioPhut), ngayDatPhong(_ngayDatPhong), phongMoi(_phongMoi), lyDoDoi(_lyDoDoi) {}
+	        thongTinDatPhong(int _phongDaDat, gioPhutGiay _gioPhut, ngayThangNam _ngayDatPhong, int _phongMoi, string _lyDoDoi) : phongDaDat(_phongDaDat), gioPhut(_gioPhut), ngayDatPhong(_ngayDatPhong), phongMoi(_phongMoi), lyDoDoi(_lyDoDoi) {}
 	    } dp;
 	
 	public:
 	    // DAT PHONG
-	    string dinhDangThoiGian(int value) {
-			if (value < 10) {
-		        return "0" + to_string(value);
+	    string dinhDangThoiGian(int i) {
+			if (i < 10) {
+		        return "0" + to_string(i);
 		    } else {
-		        return to_string(value);
+		        return to_string(i);
 		    }
 		}
 		
@@ -132,7 +130,6 @@ class datPhong : public danhSachPhong {
 	
 	    void nhap_datPhong() {
 	        while (true) {
-	            cout << "---------------------\n";
 	            cout << "Phong khach muon dat: ";
 	            cin >> dp.phongDaDat;
 	
@@ -204,6 +201,48 @@ class datPhong : public danhSachPhong {
 	    }
 	
 	    void sua_datPhong() {
+	    	while (true) {
+	    		int sua[6];
+	            cout << "---------------------\n";
+	            cout << "Phong khach muon dat: ";
+	            cin >> sua[0];
+	            set_phongDaDat(sua[0]);
+	
+	            bool valid = false;
+	            for (int i = 0; i < 3; ++i) {
+	                if (kt_datPhong(i)) {
+	                    valid = true;
+	                    break;
+	                }
+	            }
+	
+	            if (valid) {
+	                do {
+	                    cout << "Ngay dat phong (dd mm yyyy): ";
+	                    cin >> sua[1] >> sua[2] >> sua[3];
+	
+	                    if (!kt_yy(sua[3]) || !kt_mm(sua[3], sua[2]) || !kt_dd(sua[3], sua[2], sua[1])) {
+	                        cout << "Khong hop le, vui long nhap lai!\n";
+	                        cout << "---------------------\n";
+	                    }
+	                } while (!kt_yy(sua[3]) || !kt_mm(sua[3], sua[2]) || !kt_dd(sua[3], sua[2], sua[1]));
+	
+	                do {
+	                    cout << "Khung gio dat phong (h:min): ";
+	                    cin >> sua[4] >> sua[5];
+	
+	                    if (!kt_h(sua[3], sua[2], sua[1], sua[4]) || !kt_min(sua[3], sua[2], sua[1], sua[4], sua[5])) {
+	                        cout << "Khong hop le, vui long nhap lai!\n";
+	                        cout << "---------------------\n";
+	                    }
+	                } while (!kt_h(sua[3], sua[2], sua[1], sua[4]) || !kt_min(sua[3], sua[2], sua[1], sua[4], sua[5]));
+	
+	                cout << "---------------------\n";
+	                break;
+	            } else {
+	                cout << "Phong khong dung, vui long nhap lai!\n";
+	            }
+	        }
 	    }
 	
 	    void xoa_datPhong() {
@@ -215,7 +254,7 @@ class datPhong : public danhSachPhong {
 	        dp.ngayDatPhong.nam = 0;
 	    }
 	
-	    void xuat_datPhong() {
+	    void xuat_datPhong(ostream &os) {
 	    	string dinhDangGio = dinhDangThoiGian(dp.gioPhut.gio);
 			string dinhDangPhut = dinhDangThoiGian(dp.gioPhut.phut);
 			
@@ -223,11 +262,10 @@ class datPhong : public danhSachPhong {
 			string dinhDangThang = dinhDangThoiGian(dp.ngayDatPhong.thang);
 			string dinhDangNam = to_string(dp.ngayDatPhong.nam);
 	    	
-	        cout << "---------------------\n";
-	        cout << "Phong duoc dat: " << dp.phongDaDat << endl;
-	        cout << "Ngay dat phong (dd mm yyyy): " << dinhDangNgay << "/" << dinhDangThang << "/" << dinhDangNam << endl;
-	        cout << "Gio dat phong (h:min): " << dinhDangGio << ":" << dinhDangPhut << endl;        
-	        cout << "---------------------\n";
+	        os << "Phong duoc dat: " << dp.phongDaDat << endl;
+	        os << "Ngay dat phong (dd mm yyyy): " << dinhDangNgay << "/" << dinhDangThang << "/" << dinhDangNam << endl;
+	        os << "Gio dat phong (h:min): " << dinhDangGio << ":" << dinhDangPhut << endl;        
+	        os << "---------------------\n";
 	    }
 	
 	    // DOI PHONG

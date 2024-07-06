@@ -1,10 +1,16 @@
 #include "thanhToan.h"
-#include <ctime>
-#include <iostream>
-
-using namespace std;
 
 thanhToan::thanhToan() {}
+
+string thanhToan::dinhDangTien(int i) {
+    if (i < 10) {
+        return "00" + to_string(i);
+    } else if (i < 100 && i >= 10) {
+        return "0" + to_string(i);
+    } else {
+        return to_string(i);
+    }
+}
 
 double thanhToan::chuyenDoiThoiGian() {
     tm a = {};
@@ -42,6 +48,16 @@ void thanhToan::khachThanhToan() {
     cout << "\n\nHOA DON\n";
     cout << "---------------------\n";
     cout << "Thong tin thanh toan:\n\n";
+    
+    int giaNgay, giaGio;
+    if (datPhong::get_phongDaDat() == 102 || datPhong::get_phongDaDat() == 201) {
+    	giaNgay = giaNgayVip;
+		giaGio = giaGioVip;
+	} else {
+		giaNgay = giaNgayThuong;
+		giaGio = giaGioThuong;
+	}
+	
     if (soGio >= 24) {
         if (phut >= 0 && phut < 30) {
             thanhTien = ngay * giaNgay + gio * giaGio;
@@ -59,17 +75,20 @@ void thanhToan::khachThanhToan() {
             cout << "Tong thoi gian thue: " << gio << " gio, " << phut << " phut." << endl;
         }
     }
-    
-    if (get_phongDaDat() == 102 || get_phongDaDat() == 201) {
-    	thanhTien *= 1,1;
-	}
+	
+	thanhTien += (double)dichVu::get_tongTien();
 	
 	int tien = static_cast<int>(thanhTien);
-    cout << "Thanh tien: " << tien / 1000 << "." << tien % 1000 << ".000 vnd" << endl;
+	if (tien >= 1000) {
+		cout << "Thanh tien: " << tien / 1000 << "." << dinhDangTien(tien % 1000) << ".000 vnd" << endl;
+	} else {
+		cout << "Thanh tien: " << tien << ".000 vnd" << endl;
+	}
+    
 
     int luaChon;
     cout << "---------------------\n";
-    cout << "Phuong thuc thanh toan:\n";
+    cout << "Phuong thuc thanh toan:\n\n";
     cout << "01. Tien mat\n";
     cout << "02. Chuyen khoan\n";
     cout << "---------------------\n";
@@ -88,8 +107,42 @@ void thanhToan::khachThanhToan() {
             cout << "Loi nhap, vui long thu lai!\n";
         }
     }
+    cout << "----------------------------------------------------\n";
+}
 
-    cout << "\n---------------------\n\n";
-    cout << "HOAN THANH HOA DON\n----------------------------------------------------\n";
+double thanhToan::get_thanhTien() {
+	return thanhTien;
+}
+
+void thanhToan::xuat_thanhToan(ostream &os) {
+	double thoiGian = chuyenDoiThoiGian();
+    double soPhut = thoiGian / 60;
+    double soGio = thoiGian / 3600;
+    double soNgay = thoiGian / (3600 * 24);
+
+    int ngay = static_cast<int>(soNgay);
+    int gio = static_cast<int>(soGio) - static_cast<int>(soNgay) * 24;
+    int phut = static_cast<int>(soPhut) - static_cast<int>(soGio) * 60;
+	
+	if (soGio >= 24) {
+        if (phut >= 0 && phut < 30) {
+            os << "Tong thoi gian thue: " << ngay << " ngay, " << gio << " gio." << endl;
+        } else {
+            os << "Tong thoi gian thue: " << ngay << " ngay, " << gio << " gio, " << phut << " phut." << endl;
+        }
+    } else {
+        if (phut >= 0 && phut < 30) {
+            os << "Tong thoi gian thue: " << gio << " gio." << endl;
+        } else {
+            os << "Tong thoi gian thue: " << gio << " gio, " << phut << " phut." << endl;
+        }
+    }
+    
+    int tien = static_cast<int>(get_thanhTien());
+	if (tien >= 1000) {
+		os << "Tong so tien: " << tien / 1000 << "." << dinhDangTien(tien % 1000) << ".000 vnd" << endl;
+	} else {
+		os << "Tong so tien: " << tien << ".000 vnd" << endl;
+	}
 }
 

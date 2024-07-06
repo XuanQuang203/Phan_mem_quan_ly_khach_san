@@ -1,24 +1,22 @@
 #include "dichVu.h"
 
-void dichVu::themDichVu () {
-	string matHang[9] = {
-        "Mi", "Com rang", "Hoa qua",
-        "Nuoc cam", "Coca", "Bia",
-        "Ban chai", "Khan tam", "Dau goi"
-    };
+string dichVu::dinhDangTien(int i) {
+    if (i < 10) {
+        return "00" + to_string(i);
+    } else if (i < 100 && i >= 10) {
+        return "0" + to_string(i);
+    } else {
+        return to_string(i);
+    }
+}
 
-    int gia[9] = {
-        10, 50, 100,
-        20, 20, 30,
-        30, 50, 20
-    };
-    
-    int luaChon, soLuong, tien;
-    
+void dichVu::nhap_dichVu() {
+    int luaChon;
+
     cout << "\nTHEM DICH VU\n";
     cout << "---------------------------------------------------------\n";
     cout << "Do an:\t  01. " << matHang[0] << "\t  02. " << matHang[1] << "\t  03. " << matHang[2] << endl;
-    cout << "\t  " << gia[0] << ".000 vnd\t  " << gia[1] << ".000 nvd\t  " << gia[2] << ".000 vnd\n\n";
+    cout << "\t  " << gia[0] << ".000 vnd\t  " << gia[1] << ".000 vnd\t  " << gia[2] << ".000 vnd\n\n";
     cout << "Do uong:  04. " << matHang[3] << "\t  05. " << matHang[4] << "\t  06. " << matHang[5] << endl;
     cout << "\t  " << gia[3] << ".000 vnd\t  " << gia[4] << ".000 vnd\t  " << gia[5] << ".000 vnd\n\n";
     cout << "Khac:\t  07. " << matHang[6] << "\t  08. " << matHang[7] << "\t  09. " << matHang[8] << endl;
@@ -26,36 +24,67 @@ void dichVu::themDichVu () {
     cout << "---------------------------------------------------------\n";
     cout << "00. Hoan tat lua chon.\n";
     cout << "---------------------\n";
-    
+
     do {
         cout << "Khach chon: ";
-        cin.ignore();
         cin >> luaChon;
-        
-        switch (luaChon) {
-            case 1:
-                cout << "Nhap so luong: ";
-                cin >> soLuong;
-                tien = soLuong * 10;
-                
-                cout << "So tien " << tien << ".000 vnd da duoc them vao hoa don.\n";
-                break;
-                
-            case 2:
-                
-                break;
-                
-            case 3:
-                
-                break;
-                
-            case 0:
-            	break;
-            	
-            default:
-                cout << "Lua chon khong hop le, vui long chon lai.\n";
-                break;
+        if (luaChon == 0) break;
+
+        if (luaChon >= 1 && luaChon <= 9) {
+            cout << "Nhap so luong: ";
+            cin >> soLuong;
+            tien[luaChon - 1] = soLuong * gia[luaChon - 1];
+            tongTien += tien[luaChon - 1];
+
+            cout << matHang[luaChon - 1] << " voi gia: ";
+            if (tien[luaChon - 1] >= 1000) {
+                cout << tien[luaChon - 1] / 1000 << "." << dinhDangTien(tien[luaChon - 1] % 1000) << ".000 vnd";
+            } else {
+                cout << tien[luaChon - 1] << ".000 vnd";
+            }
+            cout << " (so luong: " << soLuong << ") da duoc them vao hoa don.\n";
+            cout << "---------------------\n\n";
+        } else {
+            cout << "Lua chon khong hop le, vui long chon lai.\n";
         }
-    } while (luaChon <= 0 || luaChon > 9);
+    } while (true);
+	
+	cout << "\n---------------------\n";
+    cout << "Tong so tien cac mat hang: ";
+    if (tongTien >= 1000) {
+        cout << tongTien / 1000 << "." << dinhDangTien(tongTien % 1000) << ".000 vnd\n";
+    } else {
+        cout << tongTien << ".000 vnd\n";
+    }
+    cout << "--------------------------------------------------\n";
+}
+
+int dichVu::get_tongTien() {
+    return tongTien;
+}
+
+void dichVu::xuat_dichVu(ostream &os) {
+	for (int i = 0; i < 9; i++) {
+		if (tien[i] != 0) {
+			os << matHang[i] << ": ";
+			if (tien[i] >= 1000) {
+                os << tien[i] / 1000 << "." << dinhDangTien(tien[i] % 1000) << ".000 vnd\n";
+            } else {
+                os << tien[i] << ".000 vnd\n";
+            }
+		} else {
+			continue;
+		}
+	}
+	
+	os << "\nSo tien cac dich vu phat sinh: ";
+	if (get_tongTien() != 0) {
+		if (get_tongTien() >= 1000) {
+        	os << get_tongTien() / 1000 << "." << dinhDangTien(get_tongTien() % 1000) << ".000 vnd\n";
+	    } else {
+	        os << get_tongTien() << ".000 vnd\n";
+	    }
+	    os << "---------------------\n";
+	}
 }
 

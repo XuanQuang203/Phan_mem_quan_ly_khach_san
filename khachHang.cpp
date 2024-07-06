@@ -1,3 +1,4 @@
+#include <fstream>
 #include "datPhong.h"
 #include "thanhToan.h"
 
@@ -8,8 +9,7 @@ class khachHang : public virtual datPhong, public virtual checkIn, public virtua
 	
 	        ngayThangNam() {}
 	
-	        ngayThangNam(int _ngay, int _thang, int _nam):
-				ngay(_ngay), thang(_thang), nam(_nam) {}
+	        ngayThangNam(int _ngay, int _thang, int _nam) : ngay(_ngay), thang(_thang), nam(_nam) {}
 	    } dmy;
 	
 	    struct thongTinkhach {
@@ -18,8 +18,7 @@ class khachHang : public virtual datPhong, public virtual checkIn, public virtua
 	
 	        thongTinkhach() {}
 	
-	        thongTinkhach(string _cccd, string _soDienThoai, string _hoTen, ngayThangNam _ngaySinh):
-				hoTen(_hoTen), cccd(_cccd), ngaySinh(_ngaySinh), soDienThoai(_soDienThoai) {}
+	        thongTinkhach(string _cccd, string _soDienThoai, string _hoTen, ngayThangNam _ngaySinh) : hoTen(_hoTen), cccd(_cccd), ngaySinh(_ngaySinh), soDienThoai(_soDienThoai) {}
 	    } kh;
 
 	public:
@@ -27,16 +26,22 @@ class khachHang : public virtual datPhong, public virtual checkIn, public virtua
 		
 		~khachHang() {}
 		
-		string dinhDangThoiGian(int value) {
-			if (value < 10) {
-		        return "0" + to_string(value);
+		string dinhDangThoiGian(int i) {
+			if (i < 10) {
+		        return "0" + to_string(i);
 		    } else {
-		        return to_string(value);
+		        return to_string(i);
 		    }
 		}
 		
 		bool kt_yy(int yy) {
-		    return yy >= 1900 && yy <= 2024;
+			time_t now = time(0);
+		    tm *ltm = localtime(&now);
+		    
+		    int _yy = 1900 + ltm->tm_year;
+		    int __yy = _yy - 100;
+			
+		    return yy >= __yy && yy <= _yy;
 		}
 		
 		bool yy_nhuan(int yy) {
@@ -84,6 +89,7 @@ class khachHang : public virtual datPhong, public virtual checkIn, public virtua
 		    } 
 			while (!kt_yy(dmy.nam) || !kt_mm(dmy.thang, dmy.nam) || !kt_dd(dmy.ngay, dmy.thang, dmy.nam));
 		    kh.ngaySinh = dmy;
+		    cout << "---------------------\n";
 		
 		    datPhong::nhap_datPhong();
 		}
@@ -157,21 +163,20 @@ class khachHang : public virtual datPhong, public virtual checkIn, public virtua
 			return dinhDangThoiGian(datPhong::get_ngayDatPhong()) + dinhDangThoiGian(datPhong::get_thangDatPhong()) + dinhDangThoiGian(datPhong::get_namDatPhong() - 2000) + get_cccd();
 		}
 		
-		void xuat_khachHang() {
+		void xuat_khachHang(ostream &os) {
 		    chuanHoaChu();
 		    string dinhDangNgay = dinhDangThoiGian(kh.ngaySinh.ngay);
 		    string dinhDangThang = dinhDangThoiGian(kh.ngaySinh.thang);
 		    string dinhDangNam = to_string(kh.ngaySinh.nam);
 		    
-		    cout << "\nHo ten khach hang: " << kh.hoTen << endl;
-		    cout << "Cccd: " << kh.cccd << endl;
-		    cout << "Ngay sinh (dd mm yyyy): " << dinhDangNgay << "/" << dinhDangThang << "/" << dinhDangNam << endl;
-		    cout << "So dien thoai: " << kh.soDienThoai << endl;
-		
-		    datPhong::xuat_datPhong();
+		    os << "\nHo ten khach hang: " << kh.hoTen << endl;
+		    os << "Cccd: " << kh.cccd << endl;
+		    os << "Ngay sinh (dd mm yyyy): " << dinhDangNgay << "/" << dinhDangThang << "/" << dinhDangNam << endl;
+		    os << "So dien thoai: " << kh.soDienThoai << endl;
+		    os << "---------------------\n";
 		}
 		
-		void sua_khachHang(int &n) {
+		void sua_khachHang() {
 		    int luaChon;
 		    
 		    do {
@@ -182,7 +187,7 @@ class khachHang : public virtual datPhong, public virtual checkIn, public virtua
 		        cout << "\n03. Sua ngay thang nam sinh";
 		        cout << "\n04. Sua so dien thoai";
 		        cout << "\n05. Sua tat ca thong tin";
-		        cout << "\n06. Tro ve";
+		        cout << "\n\n00. Tro ve";
 		        cout << "\n---------------------";
 		        cout << "\nNhap lua chon: ";
 		        cin >> luaChon;
@@ -246,6 +251,10 @@ class khachHang : public virtual datPhong, public virtual checkIn, public virtua
 		                getline(cin, kh.soDienThoai);
 		                break;
 		                
+		            case 0:
+		            	cout << "Da thoat chinh sua!";
+		            	break;
+		                
 		            default:
 		            	cout << "Lua chon khong hop le, vui long nhap lai!\n";
 		                break;
@@ -308,17 +317,44 @@ class khachHang : public virtual datPhong, public virtual checkIn, public virtua
 			}
 			
 		    if (checkIn::get_ngayVao() != 0 && checkOut::get_ngayRa() == 0) {
-		        checkIn::xuat_checkIn();
+		        checkIn::xuat_checkIn(cout);
 		        cout << "\nKhach chua tra phong\n";
 				cout << "------------------------------\n\n";
 		    }
 		
 		    if (checkOut::get_ngayRa() != 0) {
-		    	checkIn::xuat_checkIn();
-		        checkOut::xuat_checkOut();
+		    	checkIn::xuat_checkIn(cout);
+		        checkOut::xuat_checkOut(cout);
 		        cout << "\nKhach da thanh toan\n";
 				cout << "------------------------------\n\n";
 		    }
 		}
+		
+		string tenHoaDon() {
+	        return "hoaDon" + string("/") + maKhachHang() + ".txt";
+	    }
+	    
+	    void hoaDon() {
+	        ofstream fs;
+	        fs.open(tenHoaDon(), ios::out | ios::trunc);
+	        
+	        if (fs.is_open()) {
+	            fs << "----------------------------------------------------\nHOA DON\n---------------------\n";
+	            fs << "Ma khach hang: " << maKhachHang() << endl;
+	            xuat_khachHang(fs);
+	            xuat_datPhong(fs);
+	            xuat_checkIn(fs);
+	            xuat_checkOut(fs);
+	            xuat_dichVu(fs);
+	            xuat_thanhToan(fs);
+	            fs << "---------------------\n";
+	            fs << "\nCam on quy khach da su dung dich vu!";
+	            fs << "\n----------------------------------------------------\n";
+	            fs.close();
+	            cout << "Thong tin hoa don da duoc ghi vao file " << tenHoaDon() << "\n";
+	        } else {
+	            cerr << "Khong the mo file de ghi thong tin hoa don.\n";
+	        }
+	    }
 };
 

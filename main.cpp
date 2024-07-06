@@ -3,7 +3,8 @@
 #include <cstdlib>
 #include <limits>
 
-#include "khachHang.cpp"
+//#include "khachHang.cpp"
+#include "baoCao.cpp"
 //#include "thoiGian.cpp"
 
 void themKhachHang(khachHang *&khach, int &n);
@@ -13,14 +14,14 @@ void nhap_duLieu(khachHang *&khach, int &n); //1
 void xuat_duLieu(khachHang *&khach, int &n); //2
 void sua_duLieu(khachHang *&khach, int &n); //3
 void khachDoiPhong(khachHang *&khach, int &n); //4
-void themDichVu(khachHang *&khach, int &n); //5
+void themDichVu(khachHang *&khach, int &n); //5 chua xong
 void khachCheckIn(khachHang *&khach, int &n); //6
 void khachCheckOut(khachHang *&khach, int &n); //7
 void timKiem_duLieu(khachHang *&khach, int &n); //8
 void xoa_duLieu(khachHang *&khach, int &n); //9
 
 void thongTinDanhSachPhong(); //10
-void baoCao(); //11
+void baoCao(); //11 chua xong
 
 void menu(khachHang *& khach, int & n);
 
@@ -36,12 +37,12 @@ int main() {
 	return 0;
 }
 
-string dinhDangThoiGian(int value) {
-	if (value < 10) {
-        return "0" + to_string(value);
+string dinhDangThoiGian(int i) {
+	if (i < 10) {
+        return "0" + to_string(i);
     } 
 	else {
-        return to_string(value);
+        return to_string(i);
     }
 }
 
@@ -68,9 +69,8 @@ bool kiemTraThongTin(khachHang *&khach, int &n) { //fix ma kh
 	getline(cin, kiemTra);
 	cout << "--------------------------------------------------\n";
 	
-//	string mkh = maKhachHang(khach, n);
 	for (int i=0; i<n; i++) {
-		if (khach[i].get_cccd() == kiemTra /*|| mkh == kiemTra*/) { //fix
+		if (kiemTra == khach[i].get_cccd() || kiemTra == khach[i].maKhachHang()) { //fix
 			return true;
 			dem++;
 		}
@@ -121,7 +121,7 @@ bool trungDatPhong(khachHang *&khach, int n) {
 }
 
 //01. Nhap du lieu khach hang + dat phong
-//nhap du lieu vao mang, neu mang da co du lieu thi dung ham tang so luong mang dong. 
+//nhap du lieu vao mang, neu mang da co du lieu thi dung ham tang so luong mang dong.
 //khach sau se duoc check xem co trung thong tin cac khach truoc khong, neu co nhap lai
 void nhap_duLieu(khachHang *&khach, int &n) {
     cout << "\n\nNHAP THONG TIN KHACH HANG";
@@ -160,7 +160,8 @@ void xuat_duLieu(khachHang *&khach, int &n) { //fix ma kh
     		cout << "STT: " << i + 1 << "\n---------------------\n";
     		
     		cout << "Ma khach hang: " << khach[i].maKhachHang() << endl; 
-		    khach[i].xuat_khachHang(); 
+		    khach[i].xuat_khachHang(cout); 
+		    khach[i].xuat_datPhong(cout);
 		    khach[i].kt_tinhTrangPhong();
 			dem++;
 		}
@@ -184,12 +185,12 @@ void sua_duLieu(khachHang *&khach, int &n) {
 			cout << "\n--------------------------------------------------";
 			cout << "\nXac nhan lai thong tin cua khach hang\n";
 			cout << "---------------------\n";
-			khach[i].xuat_khachHang();
+			khach[i].xuat_khachHang(cout);
 			
-			int luaChon, sua[5];
+			int luaChon;
 			cout << "\n---------------------\n";
 			cout << "01. Sua thong tin khach hang\n";
-			cout << "01. Sua thong tin dat phong\n";
+			cout << "02. Sua thong tin dat phong\n";
 			cout << "03. Sua thoi gian check-in\n";
 			cout << "04. Sua thoi gian check-out\n\n";
 			cout << "00. Thoat chinh sua\n";
@@ -199,16 +200,20 @@ void sua_duLieu(khachHang *&khach, int &n) {
 			
 			switch (luaChon) {
 			    case 1:
-			    	khach[i].sua_khachHang(n);
+			    	khach[i].sua_khachHang();
+			    	break;
 			        
 			    case 2:
-//			        khach[i].sua_khachHang();
+			        khach[i].sua_datPhong();
+			        break;
 			    
 				case 3:	
 				    khach[i].sua_checkIn();
+				    break;
 			        
 				case 4:
 					khach[i].sua_checkOut();
+					break;
 			    	
 			    case 0:
 			    	break;
@@ -227,7 +232,8 @@ void khachDoiPhong(khachHang *&khach, int &n) {
 	if (kiemTraThongTin(khach, n) == true) {
 		for(int i=0; i<n; i++){
 			cout << "Ma khach hang: " << khach[i].maKhachHang() << endl; 
-			khach[i].xuat_khachHang();
+			khach[i].xuat_khachHang(cout);
+			khach[i].xuat_datPhong(cout);
 			khach[i].nhap_doiPhong();
 			
 			khach[i].xacNhanLai();
@@ -245,37 +251,44 @@ void khachDoiPhong(khachHang *&khach, int &n) {
 //05. khach dung them dich vu
 //khach dung them cac loai hinh dich vu
 void themDichVu(khachHang *&khach, int &n) {
-//	if (kiemTraThongTin(khach, n) == true) {
+	if (kiemTraThongTin(khach, n) == true) {
 		for(int i=0; i<n; i++){
-//			cout << "\n\nTHONG TIN KHACH HANG" << endl;
-//			cout << "---------------------\n";
-//			cout << "Ma khach hang: " << khach[i].maKhachHang() << endl; 
-//			khach[i].xuat_khachHang();
+			cout << "\n\nTHONG TIN KHACH HANG" << endl;
+			cout << "---------------------\n";
+			cout << "Ma khach hang: " << khach[i].maKhachHang() << endl; 
+			khach[i].xuat_khachHang(cout);
 			
-			khach[i].themDichVu();
+			khach[i].nhap_dichVu();
+//			khach[i].xuat_dichVu();
 			break;
 		}
-//	} 
-//	else {
-//		cout << "\nKhong tim thay khach hang!\n";
-//		cout << "--------------------------------------------------\n";
-//	}
+	} 
+	else {
+		cout << "\nKhong tim thay khach hang!\n";
+		cout << "--------------------------------------------------\n";
+	}
 }
 
 //06. khach hang check-in
 //nhap thoi gian khach nhan phong. k qua 30p so voi dat phong
 void khachCheckIn(khachHang *&khach, int &n) {
 	if (kiemTraThongTin(khach, n) == true) {
-		for (int i=0; i<n; i++) {
+		for (int i = 0; i < n; i++) {
 			cout << "\n\nTHONG TIN KHACH HANG" << endl;
 			cout << "---------------------\n";
 			cout << "Ma khach hang: " << khach[i].maKhachHang() << endl; 
-			khach[i].xuat_khachHang();
+			khach[i].xuat_khachHang(cout);
+			khach[i].xuat_datPhong(cout);
 			khach[i].nhap_checkIn();
-			
+			break;
+		}
+		
+		for (int i = 0; i < n; i++) {
 			cout << "\n\nTHONG TIN DICH VU\n";
-			khach[i].xuat_datPhong();
-			khach[i].xuat_checkIn();
+			cout << "---------------------\n";
+			khach[i].xuat_datPhong(cout);
+			khach[i].xuat_checkIn(cout);
+			break;
 		}
 	} 
 	else {
@@ -285,25 +298,32 @@ void khachCheckIn(khachHang *&khach, int &n) {
 }
 
 //07. khach hang check-out
-//nhap thoi gian khach tra phong. k qua 30p so voi dat phong
+//nhap thoi gian khach tra phong. 
 void khachCheckOut(khachHang *&khach, int &n) {
 	if (kiemTraThongTin(khach, n) == true) {
-		for (int i=0; i<n; i++) {
+		for (int i = 0; i < n; i++) {
 			cout << "\n\nTHONG TIN KHACH HANG" << endl;
 			cout << "---------------------\n";
 			cout << "Ma khach hang: " << khach[i].maKhachHang() << endl; 
-			khach[i].xuat_khachHang();
-			khach[i].xuat_checkIn();
+			khach[i].xuat_khachHang(cout);
+			khach[i].xuat_datPhong(cout);
+			khach[i].xuat_checkIn(cout);
 			khach[i].nhap_checkOut();
-			
+			break;
+		}
+		
+		for (int i = 0; i < n; i++) {
 			cout << "\n\nTHONG TIN DICH VU\n";
-			khach[i].xuat_datPhong();
-			khach[i].xuat_checkIn();
-			khach[i].xuat_checkOut();
+			cout << "---------------------\n";
+			cout << "Phong khach da dat: " << khach[i].get_phongDaDat() << endl;
+			khach[i].xuat_checkIn(cout);
+			khach[i].xuat_checkOut(cout);
 			
 			khach[i].khachThanhToan();
+			khach[i].hoaDon();
+			break;
 		}
-	} 
+	}
 	else {
 		cout << "\nKhong tim thay khach hang!\n";
 		cout << "--------------------------------------------------\n";
@@ -337,7 +357,8 @@ void timKiem_duLieu(khachHang *&khach, int &n){
 	            for (int i = 0; i < n; i++) {
 	                if (timKiem == khach[i].maKhachHang()) {
 	                    cout << "THONG TIN KHACH HANG\n";
-	                    khach[i].xuat_khachHang();
+	                    khach[i].xuat_khachHang(cout);
+	                    khach[i].xuat_datPhong(cout);
 	                    dem++;
 	                }
 	            }
@@ -351,7 +372,8 @@ void timKiem_duLieu(khachHang *&khach, int &n){
 	            for (int i = 0; i < n; i++) {
 	                if (timKiem == khach[i].get_cccd()) {
 	                    cout << "THONG TIN KHACH HANG\n";
-	                    khach[i].xuat_khachHang();
+	                    khach[i].xuat_khachHang(cout);
+	                    khach[i].xuat_datPhong(cout);
 	                    dem++;
 	                }
 	            }
@@ -365,7 +387,8 @@ void timKiem_duLieu(khachHang *&khach, int &n){
 	            for (int i = 0; i < n; i++) {
 	                if (timKiem == khach[i].get_soDienThoai()) {
 	                    cout << "THONG TIN KHACH HANG\n";
-	                    khach[i].xuat_khachHang();
+	                    khach[i].xuat_khachHang(cout);
+	                    khach[i].xuat_datPhong(cout);
 	                    dem++;
 	                }
 	            }
@@ -393,7 +416,7 @@ void xoa_duLieu(khachHang *&khach, int &n) {
 			cout << "Xac nhan lai thong tin cua khach hang" << endl;
 			cout << "---------------------\n";
 			cout << "Ma khach hang: " << khach[i].maKhachHang() << endl; 
-			khach[i].xuat_khachHang();
+			khach[i].xuat_khachHang(cout);
 			khach[i].xoa_khachHang();
 			break;
 		}
@@ -408,6 +431,7 @@ void xoa_duLieu(khachHang *&khach, int &n) {
 //lua chon hien thi thong tin, danh sach va trang thai cua cac phong
 void thongTinDanhSachPhong() {
 	danhSachPhong _dsp;
+	
 	int luaChon;
 	cout << "\n--------------------------------------------------\n";
 	cout << "01. Cap nhat thong tin tinh trang phong" << endl;
@@ -434,7 +458,9 @@ void thongTinDanhSachPhong() {
 //11. baoCao
 //xuat bao cao theo ngay vao cac file .txt
 void baoCao() {
-	
+//	baoCao _bc;
+//	
+//	_bc.baoCaoNgay();
 } 
 
 //menu
