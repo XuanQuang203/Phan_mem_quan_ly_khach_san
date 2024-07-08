@@ -49,7 +49,7 @@ void dichVu::nhap_dichVu() {
         }
     } while (true);
 	
-	cout << "\n---------------------\n";
+	cout << "---------------------\n";
     cout << "Tong so tien cac mat hang: ";
     if (tongTien >= 1000) {
         cout << tongTien / 1000 << "." << dinhDangTien(tongTien % 1000) << ".000 vnd\n";
@@ -77,8 +77,8 @@ void dichVu::xuat_dichVu(ostream &os) {
 		}
 	}
 	
-	os << "\nSo tien cac dich vu phat sinh: ";
 	if (get_tongTien() != 0) {
+		os << "\nSo tien cac dich vu phat sinh: ";
 		if (get_tongTien() >= 1000) {
         	os << get_tongTien() / 1000 << "." << dinhDangTien(get_tongTien() % 1000) << ".000 vnd\n";
 	    } else {

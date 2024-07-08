@@ -335,26 +335,73 @@ class khachHang : public virtual datPhong, public virtual checkIn, public virtua
 	    }
 	    
 	    void hoaDon() {
-	        ofstream fs;
-	        fs.open(tenHoaDon(), ios::out | ios::trunc);
+	        ofstream ofs;
+	        ofs.open(tenHoaDon(), ios::out | ios::trunc);
 	        
-	        if (fs.is_open()) {
-	            fs << "----------------------------------------------------\nHOA DON\n---------------------\n";
-	            fs << "Ma khach hang: " << maKhachHang() << endl;
-	            xuat_khachHang(fs);
-	            xuat_datPhong(fs);
-	            xuat_checkIn(fs);
-	            xuat_checkOut(fs);
-	            xuat_dichVu(fs);
-	            xuat_thanhToan(fs);
-	            fs << "---------------------\n";
-	            fs << "\nCam on quy khach da su dung dich vu!";
-	            fs << "\n----------------------------------------------------\n";
-	            fs.close();
+	        if (ofs.is_open()) {
+	            ofs << "----------------------------------------------------\nHOA DON\n---------------------\n";
+	            ofs << "Ma khach hang: " << maKhachHang() << endl;
+	            xuat_khachHang(ofs);
+	            xuat_datPhong(ofs);
+	            xuat_checkIn(ofs);
+	            xuat_checkOut(ofs);
+	            xuat_dichVu(ofs);
+	            xuat_thanhToan(ofs);
+	            ofs << "---------------------\n";
+	            ofs << "\nCam on quy khach da su dung dich vu!";
+	            ofs << "\n----------------------------------------------------\n";
+	            ofs.close();
 	            cout << "Thong tin hoa don da duoc ghi vao file " << tenHoaDon() << "\n";
 	        } else {
 	            cerr << "Khong the mo file de ghi thong tin hoa don.\n";
 	        }
 	    }
+	    
+	    string tenBaoCao() {
+	        return "baoCao" + string("/") + to_string(datPhong::get_ngayDatPhong()) + "_" + to_string(datPhong::get_thangDatPhong()) + "_" + to_string(datPhong::get_namDatPhong()) + ".txt";
+	    }
+		
+		void nhap_baoCao() {
+			time_t now = time (0);
+			tm *ltm = localtime (&now);
+			
+			int gio = ltm->tm_hour;
+		    int phut = ltm->tm_min;
+		    int giay = ltm->tm_sec;
+			
+			int ngay = ltm->tm_mday;
+		    int thang = 1 + ltm->tm_mon;
+		    int nam = 1900 + ltm->tm_year;
+		    
+			ofstream ofs;
+	        ofs.open(tenBaoCao(), ios::out | ios::app);
+	        
+	        ofs << "----------------------------------------------------\nBAO CAO NGAY\n---------------------\n";
+	        if (ofs.is_open()) {
+	            ofs << "Ma khach hang: " << maKhachHang() << endl;
+	            xuat_khachHang(ofs);
+	            xuat_datPhong(ofs);
+	            xuat_checkIn(ofs);
+	            xuat_checkOut(ofs);
+	            xuat_dichVu(ofs);
+	            xuat_thanhToan(ofs);
+	            ofs << "---------------------\n";
+	            ofs << "Thoi gian tao bao cao: " << dinhDangThoiGian(gio) << ":" << dinhDangThoiGian(phut) << ":" << dinhDangThoiGian(giay) << " "
+	            << dinhDangThoiGian(ngay) << "/" << dinhDangThoiGian(thang) << "/" << dinhDangThoiGian(nam) << endl;
+	            ofs << "----------------------------------------------------\n\n\n";
+	            ofs.close();
+	            cout << "Bao cao ngay da duoc ghi vao file " << tenBaoCao() << "\n";
+	        } else {
+	            cerr << "Khong the mo file de ghi thong tin bao cao.\n";
+	        }
+		}
+		
+		void xuat_baoCao() {
+			fstream fs;
+			fs.open(tenBaoCao(), ios::in);
+			string xuat;
+			getline(fs, xuat);
+			fs.close();
+		}
 };
 

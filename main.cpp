@@ -3,8 +3,7 @@
 #include <cstdlib>
 #include <limits>
 
-//#include "khachHang.cpp"
-#include "baoCao.cpp"
+#include "khachHang.cpp"
 //#include "thoiGian.cpp"
 
 void themKhachHang(khachHang *&khach, int &n);
@@ -21,7 +20,7 @@ void timKiem_duLieu(khachHang *&khach, int &n); //8
 void xoa_duLieu(khachHang *&khach, int &n); //9
 
 void thongTinDanhSachPhong(); //10
-void baoCao(); //11 chua xong
+void baoCao(khachHang *& khach, int & n); //11 chua xong
 
 void menu(khachHang *& khach, int & n);
 
@@ -177,7 +176,7 @@ void xuat_duLieu(khachHang *&khach, int &n) { //fix ma kh
     }
 }
 
-//03. Sua THONG TIN KHACH HANG
+//03. Sua du lieu
 //chon khach hang, sau do chinh sua cac thong tin cua ho
 void sua_duLieu(khachHang *&khach, int &n) {
 	if (kiemTraThongTin(khach, n) == true) {
@@ -216,6 +215,11 @@ void sua_duLieu(khachHang *&khach, int &n) {
 					break;
 			    	
 			    case 0:
+			    	cout << "Da thoat chinh sua!";
+			    	break;
+			    	
+			    default:
+			    	cout << "Loi lua chon, vui long thu lai!";
 			    	break;
 			}	
 		}
@@ -259,7 +263,6 @@ void themDichVu(khachHang *&khach, int &n) {
 			khach[i].xuat_khachHang(cout);
 			
 			khach[i].nhap_dichVu();
-//			khach[i].xuat_dichVu();
 			break;
 		}
 	} 
@@ -321,6 +324,7 @@ void khachCheckOut(khachHang *&khach, int &n) {
 			
 			khach[i].khachThanhToan();
 			khach[i].hoaDon();
+			khach[i].nhap_baoCao();
 			break;
 		}
 	}
@@ -457,10 +461,23 @@ void thongTinDanhSachPhong() {
 
 //11. baoCao
 //xuat bao cao theo ngay vao cac file .txt
-void baoCao() {
-//	baoCao _bc;
-//	
-//	_bc.baoCaoNgay();
+void baoCao(khachHang *&khach, int &n) {
+	int ngay, thang, nam;
+	cout << "\nNhap ngay: ";
+	cin >> ngay >> thang >> nam;
+	
+	string ten = "baoCao/" + to_string(ngay) + "_" + to_string(thang) + "_" + to_string(nam) + ".txt";
+	
+	for (int i = 0; i < n; i++) {
+		if (ten == khach[i].tenBaoCao()) {
+			cout << endl;
+			khach[i].xuat_baoCao();
+		} else {
+			cout << "\nKhong tim thay bao cao!\n";
+			cout << "--------------------------------------------------\n";
+		}
+	}
+	
 } 
 
 //menu
@@ -561,7 +578,7 @@ void menu(khachHang *&khach, int &n) {
 				break;
 				
 			case 11:
-				baoCao();
+				baoCao(khach, n);
 				cout << endl;
 				system("\nPAUSE");
 				break;

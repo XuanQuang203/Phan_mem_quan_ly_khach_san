@@ -1,0 +1,26 @@
+----------------------------------------------------
+HOA DON
+---------------------
+Ma khach hang: 070724123
+
+Ho ten khach hang: Quang
+Cccd: 123
+Ngay sinh (dd mm yyyy): 01/01/2000
+So dien thoai: 034
+---------------------
+Phong duoc dat: 101
+Ngay dat phong (dd mm yyyy): 07/07/2024
+Gio dat phong (h:min): 17:00
+---------------------
+Ngay check-in: 07/07/2024
+Gio check-in: 16:56
+---------------------
+Ngay check-out: 07/07/2024
+Gio check-out: 18:00
+---------------------
+Tong thoi gian thue: 1 gio.
+Tong so tien: 150.000 vnd
+---------------------
+
+Cam on quy khach da su dung dich vu!
+----------------------------------------------------
